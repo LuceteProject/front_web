@@ -25,13 +25,17 @@ nav > div {
 
 .bottom-tab-item {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   padding: 15px;
   color: #333333;
 }
-
+.tab-item {
+  flex: 1;
+}
 .bottom-tab-item.active {
   color: #007bff;
 }
@@ -44,9 +48,8 @@ nav > div {
   text-align: center;
 }
 
-/* 아이콘의 크기를 24px로 설정 */
+/* 하단 아이콘 설정 */
 .custom-icon {
-  font-size: 30px;
-  color:rgba(63, 13, 112, 0.829); /* 아이콘 색상 */
+  font-size: 30px; /* 아이콘 크기 */
+  color: rgba(63, 13, 112, 0.829); /* 아이콘 색상 */
 }
-
