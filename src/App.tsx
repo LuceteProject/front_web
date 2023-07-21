@@ -15,8 +15,9 @@ import Todolist from "./pages/Todolist";
 function App() {
   return (
     <Router>
+      <Header />
       <div className="page-wrapper">
-       <Header />
+       
        <Footer />
         <Routes>
           <Route path="/" Component={Home} />

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import {
@@ -15,35 +15,32 @@ import {
   FaTasks,
   FaCalendarAlt,
   FaGoogleDrive,
-  FaHome,
-  FaCog,
   FaUser,
-  FaInfoCircle,
-  FaEnvelope,
 } from "react-icons/fa";
 
-import Board from "../pages/Board";
-import Calendar from "../pages/Calendar";
-import Drive from "../pages/Drive";
-import Profile from "../pages/Profile";
-import Todolist from "../pages/Todolist";
-
 function Header() {
+  const [expanded, setExpanded] = useState(false);
+
+  const handleToggle = () => {
+    setExpanded(!expanded);
+  };
   return (
-    <Navbar bg="light" expand="lg">
-      <Navbar.Brand href="/">My App</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="ml-auto">
-          <Nav.Link href="/">Home</Nav.Link>
-          <Nav.Link href="/board">Board</Nav.Link>
-          <Nav.Link href="/todolist">Todolist</Nav.Link>
-          <Nav.Link href="/calendar">Calendar</Nav.Link>
-          <Nav.Link href="/drive">Drive</Nav.Link>
-          <Nav.Link href="/profile">Profile</Nav.Link>
-        </Nav>
-      </Navbar.Collapse>
-    </Navbar>
+    <div>
+      <Navbar bg="light" expand="lg" className="px-10 header-content">
+        <Navbar.Brand href="/">My App</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={handleToggle}/>
+        <Navbar.Collapse id="basic-navbar-nav" in={expanded} >
+          <Nav className="ml-auto">
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/board">Board</Nav.Link>
+            <Nav.Link href="/todolist">Todolist</Nav.Link>
+            <Nav.Link href="/calendar">Calendar</Nav.Link>
+            <Nav.Link href="/drive">Drive</Nav.Link>
+            <Nav.Link href="/profile">Profile</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Navbar>
+    </div>
   );
 }
 function Footer() {
@@ -86,4 +83,4 @@ function Footer() {
   );
 }
 
-export  {Header, Footer};
+export { Header, Footer };
