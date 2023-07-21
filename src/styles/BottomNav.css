@@ -1,0 +1,52 @@
+/* nav태그 아래의 자식들을 수평정렬하기 위한 설정 */
+nav {
+  overflow: hidden;
+}
+/* nav태그 아래의 div태그들을 수평정렬 및 세로길이 설정 */
+nav > div {
+  /* 수평정렬, 5개의 button을 각각 20% width만큼 할당 */
+  text-align: center;
+  float: left;
+  width: 20%;
+
+  /* 세로길이 설정 */
+  height: 45px;
+  line-height: 45px;
+}
+/* src/styles/bottom-tab-navigation.css */
+.bottom-tab-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #ffffff;
+  box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-tab-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  color: #333333;
+}
+
+.bottom-tab-item.active {
+  color: #007bff;
+}
+/* 아이콘 다음 행에 텍스트를 위치시킴 */
+.icon-text-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+/* 아이콘의 크기를 24px로 설정 */
+.custom-icon {
+  font-size: 30px;
+  color:rgba(63, 13, 112, 0.829); /* 아이콘 색상 */
+}
+

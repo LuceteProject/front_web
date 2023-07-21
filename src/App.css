@@ -1,38 +1,9 @@
-.App {
-  text-align: center;
+/* 전체 페이지 컨테이너에 양 옆 여백을 20%로 설정 */
+.page-wrapper {
+  margin: 0 20%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* 컨텐츠 컨테이너에 양 옆 여백을 20%로 설정 */
+.content-wrapper {
+  margin: 0 20%;
 }
