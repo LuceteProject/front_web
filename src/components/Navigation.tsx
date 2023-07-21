@@ -9,6 +9,7 @@ import {
   Col,
   Card,
   Button,
+  Offcanvas,
 } from "react-bootstrap";
 import {
   FaThList,
@@ -24,12 +25,20 @@ function Header() {
   const handleToggle = () => {
     setExpanded(!expanded);
   };
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   return (
     <div>
       <Navbar bg="light" expand="lg" className="px-10 header-content">
         <Navbar.Brand href="/">My App</Navbar.Brand>
-        <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={handleToggle}/>
-        <Navbar.Collapse id="basic-navbar-nav" in={expanded} >
+        <Navbar.Toggle
+          aria-controls="basic-navbar-nav"
+          className="mr-4"
+          onClick={handleShow}
+        />
+        <Navbar.Collapse id="basic-navbar-nav" in={expanded}>
           <Nav className="ml-auto">
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="/board">Board</Nav.Link>
@@ -40,6 +49,15 @@ function Header() {
           </Nav>
         </Navbar.Collapse>
       </Navbar>
+      <Offcanvas show={show} onHide={handleClose}>
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          Some text as placeholder. In real life you can have the elements you
+          have chosen. Like, text, images, lists, etc.
+        </Offcanvas.Body>
+      </Offcanvas>
     </div>
   );
 }
