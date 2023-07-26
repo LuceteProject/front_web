@@ -52,16 +52,17 @@ function Page() {
       <div
         key={post.id}
         style={{ borderBottom: "1px solid #ccc", padding: "10px 0" }}
+        
       >
-        <div>
-          <h4>{post.title}</h4>
+        <h4>{post.title}</h4>
+        <div style={{display:'flow'}}>
+          
           <p>
             {post.author_name} / {post.updated}
           </p>
-        </div>
-        <div>
+
           <span>{post.permission}</span>
-          <span>댓글</span>
+          <span style={{float:'right'}}>댓글</span>
         </div>
       </div>
     ));
@@ -81,13 +82,13 @@ function Page() {
                 <Nav.Link eventKey="second" className="custom-tab-link">익명게시판</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="third" className="custom-tab-link">임원진게시판</Nav.Link>
+                <Nav.Link eventKey="third" className="custom-tab-link-disabled">임원진게시판</Nav.Link>
               </Nav.Item>
             </Nav>
             
           </Col>
           <Col>
-          <Button style={{float:'right', backgroundColor:'#9978C1'}}>글쓰기</Button></Col>
+          <Button style={{float:'right', backgroundColor:'#9978C1', border:'none'}}>글쓰기</Button></Col>
         </Row>
         <Row>
           <Col>
