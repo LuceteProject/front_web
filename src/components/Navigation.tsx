@@ -33,29 +33,19 @@ function Header() {
     <div>
       <Navbar bg="light" expand="lg" className="px-10 header-content">
         <Navbar.Brand href="/">My App</Navbar.Brand>
-        <Navbar.Toggle
-          aria-controls="basic-navbar-nav"
+        <Button
           className="mr-4"
           onClick={handleShow}
-        />
-        <Navbar.Collapse id="basic-navbar-nav" in={expanded}>
-          <Nav className="ml-auto">
-            <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/board">Board</Nav.Link>
-            <Nav.Link href="/todolist">Todolist</Nav.Link>
-            <Nav.Link href="/calendar">Calendar</Nav.Link>
-            <Nav.Link href="/drive">Drive</Nav.Link>
-            <Nav.Link href="/profile">Profile</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
+        >알림 </Button>
+        
       </Navbar>
-      <Offcanvas show={show} onHide={handleClose}>
+      <Offcanvas show={show} onHide={handleClose} placement="end">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Offcanvas</Offcanvas.Title>
+          <Offcanvas.Title>알림함</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
+          <p>알림함</p>
+          <p>쪽지함</p>
         </Offcanvas.Body>
       </Offcanvas>
     </div>
