@@ -3,6 +3,9 @@ import { Container, Row, Col, Button, Nav, Tab } from "react-bootstrap";
 
 import "../styles/Board.css"; // Board.css 파일에서 추가적인 스타일을 정의합니다.
 import { Link } from "react-router-dom";
+import {
+  FaPen
+} from "react-icons/fa";
 
 type Post = {
   id: number;
@@ -81,7 +84,10 @@ function Page() {
                 <Nav.Link eventKey="third" className="custom-tab-link">임원진게시판</Nav.Link>
               </Nav.Item>
             </Nav>
+            
           </Col>
+          <Col>
+          <Button style={{float:'right', backgroundColor:'#9978C1'}}>글쓰기</Button></Col>
         </Row>
         <Row>
           <Col>
@@ -91,27 +97,19 @@ function Page() {
               <Tab.Pane eventKey="second">{renderPosts()}</Tab.Pane>
               <Tab.Pane eventKey="third">{renderPosts()}</Tab.Pane>
             </Tab.Content>
+            
           </Col>
         </Row>
       </Tab.Container>
 
       {/* 글쓰기 버튼 */}
-      <div
-        style={{
-          position: "fixed",
-          right: "10%",
-          bottom: "10%",
-          width: "60px",
-          height: "60px",
-          borderRadius: "50%",
-          backgroundColor: "#b77de4",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-        }}
-      >
-        <span style={{ fontSize: "50px", color: "#fff" }}>+</span>
-      </div>
+      <FaPen
+              style={{ color: "#9978C1", position: "fixed", right: '20%', bottom: '20%', border: 1}}
+              size={50}
+              onClick={() => {
+                console.log("pressed");
+              }}
+            />
     </div>
   );
 }

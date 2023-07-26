@@ -71,24 +71,13 @@ function Page() {
   };
 
   const AllItem = ({ item }: { item: Todo }) => (
-    <div>
-      <div>{item.text}</div>
-
-      <div onClick={() => Checked(item.id)}>
-        <FaRegCircle size={25} color="#B77DE4" />
-        <FaRegCheckCircle color="#B77De4" />{" "}
-      </div>
-      <div onClick={() => handleDeleteTodo(item.id)}>
-        <FaTimes name="close" size={25} color="red" />
-      </div>
-      <div
-        style={{
-          borderBottomColor: "#B77DE4",
-          borderBottomWidth: 1,
-        }}
-      />
+    <div style={{display: 'flex', padding:5}}>
+      {item.text}
+      <FaRegCircle size={25} color="#6554A2" onClick={() => Checked(item.id)}/>
+      <FaTimes name="close" size={25} color="red" onClick={() => handleDeleteTodo(item.id)}/>
     </div>
   );
+
   const TeamItem = ({ item }: { item: Todo }) => (
     <div>
       <div>
@@ -140,20 +129,20 @@ function Page() {
           {/* 전체 투두리스트 */}
           <div
             style={{
-              backgroundColor: "#B77DE4",
+              backgroundColor: "#6554A2",
               borderRadius: 50,
-              marginRight: 250,
+              marginRight: 200,
               marginBottom: 5,
               marginTop: 15,
               
             }}
             className="todo-category"
           >
-            <p style={{ fontSize: 22, color: "#fff", paddingLeft: 10 }}>전체</p>
+            <p style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}>전체</p>
           </div>
           <div>
             <input
-              style={{ float: "left", marginRight: "10px", width: "350px" }}
+              style={{  marginRight: "10px", width: "350px" }}
               type="text"
               placeholder="전체 항목을 입력하세요"
               value={newTodoAll}
@@ -161,7 +150,8 @@ function Page() {
               onKeyDown={(e) => e.key === "Enter" && handleAddTodo()}
             />
             <FaPlusCircle
-              style={{ float: "left" }}
+              style={{ color: "#6554A2"}}
+              size={30}
               onClick={() => {
                 handleAddTodo();
                 setCategory("전체");
@@ -176,20 +166,18 @@ function Page() {
                 <AllItem key={item.id} item={item} />
               ))}
           </div>
-
+              <hr/>
           {/* 팀 투두리스트 */}
           <div
             style={{
-              backgroundColor: "#CBD773",
+              backgroundColor: "#9978C1",
               borderRadius: 50,
-              marginRight: 250,
-              alignItems: "center",
+              marginRight: 200,
               marginBottom: 5,
               marginTop: 15,
-              width: "400px",
             }}
           >
-            <p style={{ fontSize: 22, color: "#fff" }}>팀</p>
+            <p style={{ fontSize: 22, color: "#fff", paddingLeft: 20  }}>팀</p>
           </div>
 
           {/* ... (팀과 개인 투두리스트에 대한 변경) */}

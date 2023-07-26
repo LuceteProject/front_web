@@ -1,10 +1,10 @@
 /* Board.css */
 .custom-tab-link {
-  color: rgb(119, 10, 110) !important;
+  color: rgb(128, 86, 170) !important;
 }
 
 /* 탭 활성화 시의 색상도 변경하고 싶은 경우 */
 .custom-tab-link.active {
-  background-color: rgb(138, 31, 129) !important;
+  background-color: rgb(153, 120, 193) !important;
   color: white !important;
 }
