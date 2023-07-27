@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button, Nav, Tab } from "react-bootstrap";
 import { FaPen } from "react-icons/fa";
 import { PostItem } from "../components/Posts";
@@ -26,6 +27,7 @@ const dummyData: Post[] = [
 ];
 
 function Page() {
+  const navigate = useNavigate(); // useNavigate 훅 사용
   // 게시판 목록 상태
   const [posts, setPosts] = useState<Post[]>([]);
 
@@ -33,28 +35,12 @@ function Page() {
   useEffect(() => {
     setPosts(dummyData);
   }, []);
-
-  // 게시글 목록 렌더링 함수
-  const renderPosts = () => {
-    return posts.map((post) => (
-      // 레이아웃 변경 필요
-      <div
-        key={post.id}
-        style={{ borderBottom: "1px solid #ccc", padding: "10px 0" }}
-      >
-        <h5>{post.title}</h5>
-        <div style={{ display: "flow" }}>
-          <p>
-            {post.author_name} / {post.updated}
-          </p>
-
-          <span>{post.permission}</span>
-          <span style={{ float: "right" }}>댓글</span>
-        </div>
-      </div>
-    ));
+  // 게시글 클릭 이벤트 핸들러
+  const handlePostItemClick = (postId: number) => {
+    // 해당 게시글 페이지로 이동
+    console.log('pressed');
+    navigate(`/posts/${postId}`);
   };
-
   return (
     <div style={{ padding: "20px" }}>
       {/* 게시판 탭 */}
@@ -103,13 +89,13 @@ function Page() {
             {/* 게시글 목록 */}
             <Tab.Content>
               <Tab.Pane eventKey="first">
-                <PostItem posts={posts} />
+                <PostItem posts={posts} onClick={handlePostItemClick} />
               </Tab.Pane>
               <Tab.Pane eventKey="second">
-                <PostItem posts={posts} />
+                <PostItem posts={posts} onClick={handlePostItemClick} />
               </Tab.Pane>
               <Tab.Pane eventKey="third">
-                <PostItem posts={posts} />
+                <PostItem posts={posts} onClick={handlePostItemClick} />
               </Tab.Pane>
             </Tab.Content>
           </Col>
