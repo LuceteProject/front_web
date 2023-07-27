@@ -2,8 +2,8 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link, Navigate } from "react-router-dom";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./styles/BottomNav.css";
 import "./App.css";
+import "./index.css";
 import {Header, Footer} from "./components/Navigation";
 
 import Board from "./pages/Board";
