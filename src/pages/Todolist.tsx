@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { IoNotificationsOutline } from "react-icons/io5";
-
-import "../styles/Todo.css"; // Board.css 파일에서 추가적인 스타일을 정의합니다.
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import {
   FaPlusCircle,
@@ -9,14 +6,10 @@ import {
   FaRegCircle,
   FaTimes,
 } from "react-icons/fa";
+import { Todo } from "../types";
+import { TodoItem, InputTodoItem } from "../components/TodoItem";
 import { Container, Form } from "react-bootstrap";
-interface Todo {
-  id: string;
-  text: string;
-  completed: boolean;
-  category: string;
-  check: boolean;
-}
+import "../styles/Todo.css"; // Board.css 파일에서 추가적인 스타일을 정의합니다.
 
 function Page() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -28,13 +21,13 @@ function Page() {
 
   const handleAddTodo = () => {
     let newTodo = "";
-    if (category === "전체") {
+    if (category === "All") {
       newTodo = newTodoAll;
       setNewTodoAll("");
-    } else if (category === "팀") {
+    } else if (category === "Team") {
       newTodo = newTodoTeam;
       setNewTodoTeam("");
-    } else if (category === "개인") {
+    } else if (category === "Personal") {
       newTodo = newTodoPersonal;
       setNewTodoPersonal("");
     }
@@ -70,58 +63,6 @@ function Page() {
     setTodos(updatedTodos);
   };
 
-  const AllItem = ({ item }: { item: Todo }) => (
-    <div style={{display: 'flex', padding:5}}>
-      {item.text}
-      <FaRegCircle size={25} color="#6554A2" onClick={() => Checked(item.id)}/>
-      <FaTimes name="close" size={25} color="red" onClick={() => handleDeleteTodo(item.id)}/>
-    </div>
-  );
-
-  const TeamItem = ({ item }: { item: Todo }) => (
-    <div>
-      <div>
-        <div>{item.text}</div>
-
-        <div onClick={() => Checked(item.id)}>
-          <FaRegCircle size={25} color="#B77DE4" />
-          <FaRegCheckCircle color="#B77De4" />
-          <div />
-        </div>
-        <div onClick={() => handleDeleteTodo(item.id)}>
-          <FaTimes name="close" size={25} color="red" />
-        </div>
-      </div>
-      <div
-        style={{
-          borderBottomColor: "#CBD773",
-          borderBottomWidth: 1,
-        }}
-      />
-    </div>
-  );
-  const PersonalItem = ({ item }: { item: Todo }) => (
-    <div>
-      <div>
-        <div>{item.text}</div>
-
-        <div onClick={() => Checked(item.id)}>
-          <FaRegCircle size={25} color="#B77DE4" />
-          <FaRegCheckCircle color="#B77De4" />
-        </div>
-        <div onClick={() => handleDeleteTodo(item.id)}>
-          <FaTimes name="close" size={25} color="red" />
-        </div>
-      </div>
-      <div
-        style={{
-          borderBottomColor: "#CA6D68",
-          borderBottomWidth: 1,
-        }}
-      />
-    </div>
-  );
-
   return (
     <Container className="mt-4">
       <div style={{ flex: 1, backgroundColor: "#fff" }}>
@@ -134,39 +75,34 @@ function Page() {
               marginRight: 200,
               marginBottom: 5,
               marginTop: 15,
-              
             }}
             className="todo-category"
           >
-            <p style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}>전체</p>
+            <p className='title-text' style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}>전체</p>
           </div>
-          <div>
-            <input
-              style={{  marginRight: "10px", width: "350px" }}
-              type="text"
-              placeholder="전체 항목을 입력하세요"
-              value={newTodoAll}
-              onChange={(e) => setNewTodoAll(e.target.value)}
-              onKeyDown={(e) => e.key === "Enter" && handleAddTodo()}
-            />
-            <FaPlusCircle
-              style={{ color: "#6554A2"}}
-              size={30}
-              onClick={() => {
-                handleAddTodo();
-                setCategory("전체");
-              }}
-            />
-          </div>
+          <InputTodoItem
+            newTodo={newTodoAll}
+            onNewTodoChange={setNewTodoAll}
+            onAddTodo={() => {
+              handleAddTodo();
+              setCategory('All');
+            }}
+          />
 
           <div>
             {todos
-              .filter((todo) => todo.category === "전체")
+              .filter((todo) => todo.category === "All")
               .map((item) => (
-                <AllItem key={item.id} item={item} />
+                <TodoItem
+                  key={item.id}
+                  item={item}
+                  category="All"
+                  onChecked={Checked}
+                  onDelete={handleDeleteTodo}
+                />
               ))}
           </div>
-              <hr/>
+          <hr />
           {/* 팀 투두리스트 */}
           <div
             style={{
@@ -177,10 +113,64 @@ function Page() {
               marginTop: 15,
             }}
           >
-            <p style={{ fontSize: 22, color: "#fff", paddingLeft: 20  }}>팀</p>
+            <p style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}>팀</p>
           </div>
-
-          {/* ... (팀과 개인 투두리스트에 대한 변경) */}
+          <InputTodoItem
+            newTodo={newTodoTeam}
+            onNewTodoChange={setNewTodoTeam}
+            onAddTodo={() => {
+              handleAddTodo();
+              setCategory('Team');
+            }}
+          />
+          <div>
+            {todos
+              .filter((todo) => todo.category === "Team")
+              .map((item) => (
+                <TodoItem
+                  key={item.id}
+                  item={item}
+                  category="Team"
+                  onChecked={Checked}
+                  onDelete={handleDeleteTodo}
+                />
+              ))}
+          </div>
+          <hr />
+          {/* 개인 투두리스트 */}
+          <div
+            style={{
+              backgroundColor: "#D5ADDF",
+              borderRadius: 50,
+              marginRight: 200,
+              marginBottom: 5,
+              marginTop: 15,
+            }}
+          >
+            <p style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}>개인</p>
+          </div>
+          <InputTodoItem
+            newTodo={newTodoPersonal}
+            onNewTodoChange={setNewTodoPersonal}
+            onAddTodo={() => {
+              handleAddTodo();
+              setCategory('Personal');
+            }}
+          />
+          <div>
+            {todos
+              .filter((todo) => todo.category === "Personal")
+              .map((item) => (
+                <TodoItem
+                  key={item.id}
+                  item={item}
+                  category="Personal"
+                  onChecked={Checked}
+                  onDelete={handleDeleteTodo}
+                />
+              ))}
+          </div>
+          <hr />
         </div>
       </div>
     </Container>
