@@ -37,13 +37,6 @@ const TodoItem = (props: TodoItemProps) => {
         color="#ff4b6b"
         onClick={() => onDelete(item.id)}
       />
-
-      <div
-        style={{
-          borderBottomColor: borderBottomColor,
-          borderBottomWidth: 1,
-        }}
-      />
     </div>
   );
 };
