@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Todo.css"; // Board.css 파일에서 추가적인 스타일을 정의합니다.
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { FaRegCircle, FaTimes, FaPlusCircle } from "react-icons/fa";
+import { FaRegCircle, FaRegCheckCircle, FaTimes, FaPlusCircle } from "react-icons/fa";
 import { Todo } from "../types";
-
 type TodoCategory = "All" | "Team" | "Personal";
 interface TodoItemProps {
   item: Todo;
@@ -30,11 +29,12 @@ const TodoItem = (props: TodoItemProps) => {
   return (
     <div style={{ display: "flex", padding: 10 }}>
       <div style={{ marginRight: 10 }}>{item.text}</div>
-      <FaRegCircle size={20} color={color} onClick={() => onChecked(item.id)} />
+      <FaRegCircle style={{ display: item.check ? 'none' : 'block' }} size={20} color={color} onClick={() => onChecked(item.id)} />
+      <FaRegCheckCircle style={{ display: item.check ? 'block' : 'none' }} size={20} color={color} onClick={() => onChecked(item.id)} />
       <FaTimes
         className="remove-icon"
         size={20}
-        color='#ff4b6b'
+        color="#ff4b6b"
         onClick={() => onDelete(item.id)}
       />
 

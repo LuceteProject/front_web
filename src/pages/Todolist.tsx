@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import {
-  FaPlusCircle,
-  FaRegCheckCircle,
-  FaRegCircle,
-  FaTimes,
-} from "react-icons/fa";
 import { Todo } from "../types";
 import { TodoItem, InputTodoItem } from "../components/TodoItem";
 import { Container, Form } from "react-bootstrap";
