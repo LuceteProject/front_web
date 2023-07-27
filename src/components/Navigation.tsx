@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import "../styles/BottomNav.css";
 
 import {
   Navbar,
@@ -17,14 +18,10 @@ import {
   FaCalendarAlt,
   FaGoogleDrive,
   FaUser,
+  FaBell,
 } from "react-icons/fa";
 
 function Header() {
-  const [expanded, setExpanded] = useState(false);
-
-  const handleToggle = () => {
-    setExpanded(!expanded);
-  };
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
@@ -32,12 +29,14 @@ function Header() {
   return (
     <div>
       <Navbar bg="light" expand="lg" className="px-10 header-content">
-        <Navbar.Brand href="/">My App</Navbar.Brand>
-        <Button
-          className="mr-4"
+        <Navbar.Brand href="/">루케테 LUCETE</Navbar.Brand>
+        <FaBell
+          style={{
+            color: "#35256E",
+          }}
+          size={30}
           onClick={handleShow}
-        >알림 </Button>
-        
+        />
       </Navbar>
       <Offcanvas show={show} onHide={handleClose} placement="end">
         <Offcanvas.Header closeButton>
