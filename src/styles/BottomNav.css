@@ -10,7 +10,7 @@ nav > div {
   width: 20%;
 
   /* 세로길이 설정 */
-  height: 45px;
+  height: 40px;
   line-height: 45px;
 }
 /* src/styles/bottom-tab-navigation.css */
@@ -22,23 +22,18 @@ nav > div {
   background-color: #ffffff;
   box-shadow: 0px -2px 4px rgba(0, 0, 0, 0.1);
 }
-.tab-item {
-  flex: 1;
-}
 .bottom-tab-item {
-  display: flex;
+  flex: 1;
+  
   justify-content: space-between;
   align-items: center;
 
   flex-direction: column;
   align-items: center;
-  padding: 15px;
+  padding: 5px;
   color: #333333;
 }
 
-.bottom-tab-item.active {
-  background-color: #6554a2;
-}
 /* 아이콘 다음 행에 텍스트를 위치시킴 */
 .icon-text-wrapper {
   display: flex;
@@ -52,4 +47,8 @@ nav > div {
 .custom-icon {
   font-size: 30px; /* 아이콘 크기 */
   color: rgb(53, 37, 110); /* 아이콘 색상 */
+}
+/* .bottom-tab-item이 호버되었을 때 .custom-icon의 색깔을 변경 */
+.bottom-tab-item:hover .custom-icon {
+  color: #D7BCDD;
 }

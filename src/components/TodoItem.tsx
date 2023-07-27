@@ -19,12 +19,12 @@ interface InputTodoItemProps {
 const TodoItem = (props: TodoItemProps) => {
   const { item, category, onChecked, onDelete } = props;
   const categoryStyles = {
-    All: { color: "#8056AA", borderBottomColor: "#CBD773" },
-    Team: { color: "#9978C1", borderBottomColor: "#CBD773" },
-    Personal: { color: "#D5ADDF", borderBottomColor: "#CBD773" },
+    All: { color: "#8056AA"},
+    Team: { color: "#9978C1"},
+    Personal: { color: "#D5ADDF"},
   };
 
-  const { color, borderBottomColor } = categoryStyles[category];
+  const { color } = categoryStyles[category];
 
   return (
     <div style={{ display: "flex", padding: 10 }}>

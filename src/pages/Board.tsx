@@ -59,9 +59,13 @@ function Page() {
     <div style={{ padding: "20px" }}>
       {/* 게시판 탭 */}
       <Tab.Container defaultActiveKey="first">
-        <Row>
+        <Row style={{ flexWrap: "nowrap" }}>
           <Col>
-            <Nav variant="pills" className="flex-row">
+            <Nav
+              variant="pills"
+              className="flex-row"
+              style={{ flexWrap: "nowrap" }}
+            >
               <Nav.Item>
                 <Nav.Link eventKey="first" className="custom-tab-link">
                   자유게시판
@@ -73,14 +77,22 @@ function Page() {
                 </Nav.Link>
               </Nav.Item>
               <Nav.Item>
-                <Nav.Link eventKey="third" className="custom-tab-link">
+                <Nav.Link eventKey="third" className="custom-tab-link" disabled>
                   임원진게시판
                 </Nav.Link>
               </Nav.Item>
             </Nav>
           </Col>
           <Col>
-            <Button className="custom-button" style={{ float: "right" }}>
+            <Button
+              className="custom-button"
+              style={{
+                position: "fixed",
+                right: "20%",
+                bottom: "30%",
+                border: 1,
+              }}
+            >
               글쓰기
             </Button>
           </Col>

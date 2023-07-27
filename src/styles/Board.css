@@ -1,19 +1,29 @@
 /* Board.css */
 .custom-tab-link {
-  color: rgb(128, 86, 170) !important;
+  color: rgb(101, 84, 162) !important;
+  min-width: 120px; /* 원하는 크기로 지정 */
+  text-align: center; /* 텍스트를 가운데 정렬 */
 }
-
+.custom-tab-link:hover {
+  color: rgb(215, 188, 221) !important;
+}
 /* 탭 활성화 시의 색상도 변경하고 싶은 경우 */
 .custom-tab-link.active {
   background-color: rgb(153, 120, 193) !important;
   color: white !important;
 }
 
-.custom-tab-link-disabled {
+.custom-tab-link:disabled {
   color: rgb(102, 100, 100)
 }
 
+
 .custom-button {
-  background-color: rgb(153, 120, 193);
+  background-color: #6554a2;
   border: none;
+  min-width: 80px;
+  transition: background-color 0.2s; /* 애니메이션 효과를 추가 (선택사항) */
+}
+.custom-button:hover {
+  background-color: #D7BCDD; /* 호버 시 변경될 색상 */
 }

@@ -32,7 +32,7 @@ function Header() {
         <Navbar.Brand href="/">루케테 LUCETE</Navbar.Brand>
         <FaBell
           style={{
-            color: "#35256E",
+            color: "#6554A2",
           }}
           size={30}
           onClick={handleShow}
@@ -57,27 +57,27 @@ function Footer() {
         <Col sm={2} md={3} />
         <Col sm={8} md={6}>
           <Nav fill>
-            <Nav.Item className="tab-item">
+            <Nav.Item className="bottom-tab-item">
               <Nav.Link as={Link} to="/board" eventKey="board">
                 <FaThList className="custom-icon" />
               </Nav.Link>
             </Nav.Item>
-            <Nav.Item className="tab-item">
+            <Nav.Item className="bottom-tab-item">
               <Nav.Link as={Link} to="/todolist" eventKey="todolist">
                 <FaTasks className="custom-icon" />
               </Nav.Link>
             </Nav.Item>
-            <Nav.Item className="tab-item">
+            <Nav.Item className="bottom-tab-item">
               <Nav.Link as={Link} to="/calendar" eventKey="calendar">
                 <FaCalendarAlt className="custom-icon" />
               </Nav.Link>
             </Nav.Item>
-            <Nav.Item className="tab-item">
+            <Nav.Item className="bottom-tab-item">
               <Nav.Link as={Link} to="/drive" eventKey="drive">
                 <FaGoogleDrive className="custom-icon" />
               </Nav.Link>
             </Nav.Item>
-            <Nav.Item className="tab-item">
+            <Nav.Item className="bottom-tab-item">
               <Nav.Link as={Link} to="/profile" eventKey="profiles">
                 <FaUser className="custom-icon" />
               </Nav.Link>

@@ -65,7 +65,7 @@ function Page() {
         {/* 전체 투두리스트 */}
         <div
           style={{
-            backgroundColor: "#6554A2",
+            backgroundColor: "#8056AA",
             borderRadius: 50,
             marginRight: 200,
             marginBottom: 5,
