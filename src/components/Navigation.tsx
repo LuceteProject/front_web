@@ -28,15 +28,15 @@ function Header() {
   const handleShow = () => setShow(true);
   return (
     <div>
-      <Navbar bg="light" expand="lg" className="px-10 header-content">
+      <Navbar bg="light" expand="lg" className="px-10 header-content" style={{ justifyContent:"space-between" }}>
         <Navbar.Brand href="/">루케테 LUCETE</Navbar.Brand>
         <FaBell
-          style={{
-            color: "#6554A2",
-          }}
-          size={30}
-          onClick={handleShow}
-        />
+            style={{
+              color: "#6554A2",
+            }}
+            size={30}
+            onClick={handleShow}
+          />
       </Navbar>
       <Offcanvas show={show} onHide={handleClose} placement="end">
         <Offcanvas.Header closeButton>
