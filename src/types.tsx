@@ -15,3 +15,12 @@ export type Post = {
   content: string;
   permission: number;
 };
+
+export type User = {
+  id : any;
+  name : string; // 이름
+  team : string; // 소속
+  message : string; //profile message
+  number : number; //기수(논의필요)
+  image : string; //profile image(논의필요)
+}
