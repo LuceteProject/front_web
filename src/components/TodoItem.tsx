@@ -47,7 +47,7 @@ const InputTodoItem = (props: InputTodoItemProps) => {
     <div className="input-todo">
       <input
         className="input-text"
-        style={{ marginRight: "10px", width: "350px" }}
+        style={{ marginRight: "10px", width: "360px" }}
         type="text"
         placeholder="항목을 입력하세요"
         value={newTodo}

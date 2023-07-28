@@ -66,10 +66,6 @@ function Page() {
         <div
           style={{
             backgroundColor: "#8056AA",
-            borderRadius: 50,
-            marginRight: 200,
-            marginBottom: 5,
-            marginTop: 15,
           }}
           className="todo-category"
         >
@@ -89,7 +85,7 @@ function Page() {
           }}
         />
 
-        <div>
+        <div className="space-for-list">
           {todos
             .filter((todo) => todo.category === "All")
             .map((item) => (
@@ -107,13 +103,15 @@ function Page() {
         <div
           style={{
             backgroundColor: "#9978C1",
-            borderRadius: 50,
-            marginRight: 200,
-            marginBottom: 5,
-            marginTop: 15,
           }}
+          className="todo-category"
         >
-          <p style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}>팀</p>
+          <p
+            className="title-text"
+            style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
+          >
+            팀
+          </p>
         </div>
         <InputTodoItem
           newTodo={newTodoTeam}
@@ -123,7 +121,7 @@ function Page() {
             setCategory("Team");
           }}
         />
-        <div>
+        <div className="space-for-list">
           {todos
             .filter((todo) => todo.category === "Team")
             .map((item) => (
@@ -141,13 +139,15 @@ function Page() {
         <div
           style={{
             backgroundColor: "#D5ADDF",
-            borderRadius: 50,
-            marginRight: 200,
-            marginBottom: 5,
-            marginTop: 15,
           }}
+          className="todo-category"
         >
-          <p style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}>개인</p>
+          <p
+            className="title-text"
+            style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
+          >
+            개인
+          </p>
         </div>
         <InputTodoItem
           newTodo={newTodoPersonal}
@@ -157,7 +157,7 @@ function Page() {
             setCategory("Personal");
           }}
         />
-        <div>
+        <div className="space-for-list">
           {todos
             .filter((todo) => todo.category === "Personal")
             .map((item) => (
