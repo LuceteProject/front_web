@@ -5,6 +5,7 @@ export type Todo = {
   category: string;
   check: boolean;
 };
+export type TodoCategory = "All" | "Team" | "Personal";
 
 export type Post = {
   id: number;
