@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import moment from "moment";
+import "react-calendar/dist/Calendar.css";
 import "../styles/Calendar.css";
 import "../styles/Todo.css";
+import { AddEvent } from "../components/Modal";
+import { Event } from "../types";
 
 //function for get Dates from API
 function fetchDate() {
@@ -18,6 +20,20 @@ function Page() {
     "2023-07-30",
     "2023-07-31",
   ]);
+  /* 일정 추가 모달 */
+  const [showModal, setShowModal] = useState(false);
+  const handleAddEventClick = () => {
+    console.log("add button pressed");
+    setShowModal(true);
+  };
+
+  // 일정을 추가하는 함수 (API 호출 등의 로직은 여기에 추가)
+  const handleAddEvent = (eventData: Event) => {
+    // 여기서 API 호출이나 상태 업데이트 등의 로직을 수행할 수 있습니다.
+    console.log("새로운 일정 추가:", eventData);
+    // 모달 닫기
+    setShowModal(false);
+  };
 
   const handleDateChange = (
     date: Date,
@@ -109,11 +125,17 @@ function Page() {
             </div>
 
             {/* 이 곳에 선택된 날짜의 일정 정보를 표시할 컴포넌트 또는 기능을 추가할 수 있습니다 */}
-            <Button variant="primary" className="custom-button">
+            <Button className="custom-button" onClick={handleAddEventClick}>
               새 일정 추가
             </Button>
           </div>
         </Col>
+        {/* 모달 */}
+        <AddEvent
+          showModal={showModal}
+          handleCloseModal={() => setShowModal(false)}
+          onAddEvent={handleAddEvent}
+        />
       </Row>
     </Container>
   );

@@ -35,3 +35,11 @@ export type User = {
   number: number; //기수(논의필요)
   image: string; //profile image(논의필요)
 };
+
+export type Event = {
+  id: number;
+  title: string;
+  date: string;
+  startTime: string;
+  endTime: string;
+};
