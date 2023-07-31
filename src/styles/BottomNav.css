@@ -24,7 +24,7 @@ nav > div {
 }
 .bottom-tab-item {
   flex: 1;
-  
+
   justify-content: space-between;
   align-items: center;
 
@@ -50,5 +50,5 @@ nav > div {
 }
 /* .bottom-tab-item이 호버되었을 때 .custom-icon의 색깔을 변경 */
 .bottom-tab-item:hover .custom-icon {
-  color: #D7BCDD;
+  color: #d7bcdd;
 }
