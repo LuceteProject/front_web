@@ -1,27 +1,34 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button, Nav, Tab } from "react-bootstrap";
-import { FaPen } from "react-icons/fa";
-import { PostItem } from "../components/Posts";
+import { PostListItem } from "../components/Posts";
 import "../styles/Board.css";
 import { Post } from "../types";
 
 const dummyData: Post[] = [
   {
     id: 1,
+    header: 0,
     title: "게시글 제목1",
+    author_id:10211,
     author_name: "작성자1",
     updated: "2023-07-21 12:30",
     content: "게시글 내용1",
     permission: 3,
+    is_notice: false,
+    board_id: 0,
   },
   {
     id: 2,
+    header: 0,
     title: "게시글 제목2",
+    author_id:10211,
     author_name: "작성자2",
     updated: "2023-07-21 14:45",
     content: "게시글 내용2",
     permission: 5,
+    is_notice: false,
+    board_id: 0,
   },
   // 더미데이터 추가
 ];
@@ -30,22 +37,32 @@ function Page() {
   const navigate = useNavigate(); // useNavigate 훅 사용
   // 게시판 목록 상태
   const [posts, setPosts] = useState<Post[]>([]);
+  const [selectedPost, setSelectedPost] = useState<Post | null>(); // 클릭한 게시물 정보를 상태로 관리
 
   // 더미데이터를 받아오는 API 호출 시뮬레이션
   useEffect(() => {
     setPosts(dummyData);
   }, []);
+
   // 게시글 클릭 이벤트 핸들러
   const handlePostItemClick = (postId: number) => {
-    // 해당 게시글 페이지로 이동
-    console.log('pressed');
-    navigate(`/posts/${postId}`);
+    const post = dummyData.find((item) => item.id === postId);
+    if (post) {
+      setSelectedPost(post); // 선택한 게시물 정보를 상태로 설정
+    } else {
+      console.log(`Post with id ${postId} not found.`);
+    }
   };
+  useEffect(() => {
+    if (selectedPost) {
+      navigate(`/posts/${selectedPost.id}`); // 선택한 게시물의 id로 경로 설정
+    }
+  }, [selectedPost]);
   return (
-    <div style={{ padding: "20px" }}>
+    <div style={{ paddingTop: "20px" }}>
       {/* 게시판 탭 */}
       <Tab.Container defaultActiveKey="first">
-        <Row style={{ flexWrap: "nowrap" }}>
+        <Row>
           <Col>
             <Nav
               variant="pills"
@@ -69,19 +86,6 @@ function Page() {
               </Nav.Item>
             </Nav>
           </Col>
-          <Col>
-            <Button
-              className="custom-button"
-              style={{
-                position: "fixed",
-                right: "20%",
-                bottom: "30%",
-                border: 1,
-              }}
-            >
-              글쓰기
-            </Button>
-          </Col>
         </Row>
         <div style={{ height: 10 }} />
         <Row>
@@ -89,33 +93,34 @@ function Page() {
             {/* 게시글 목록 */}
             <Tab.Content>
               <Tab.Pane eventKey="first">
-                <PostItem posts={posts} onClick={handlePostItemClick} />
+                <PostListItem posts={posts} onClick={handlePostItemClick} />
               </Tab.Pane>
               <Tab.Pane eventKey="second">
-                <PostItem posts={posts} onClick={handlePostItemClick} />
+                <PostListItem posts={posts} onClick={handlePostItemClick} />
               </Tab.Pane>
               <Tab.Pane eventKey="third">
-                <PostItem posts={posts} onClick={handlePostItemClick} />
+                <PostListItem posts={posts} onClick={handlePostItemClick} />
               </Tab.Pane>
             </Tab.Content>
           </Col>
         </Row>
+        <Row>
+          <Col>
+            <Button
+              className="custom-button"
+              style={{
+                position: "sticky",
+                float: "right",
+                marginTop: "20px",
+                border: 1,
+              }}
+            >
+              글쓰기
+            </Button>
+          </Col>
+        </Row>
       </Tab.Container>
-
-      {/* 글쓰기 버튼 */}
-      <FaPen
-        style={{
-          color: "#9978C1",
-          position: "fixed",
-          right: "20%",
-          bottom: "20%",
-          border: 1,
-        }}
-        size={50}
-        onClick={() => {
-          console.log("pressed");
-        }}
-      />
+      
     </div>
   );
 }
