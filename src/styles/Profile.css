@@ -22,9 +22,9 @@
 }
 
 .message-text {
-  font-size: 16px;
-  padding-top: 7px;
+  font-size: 30px;
   color: #6554a2;
+  font-family: 'Dongle'
 }
 
 .setting-button {

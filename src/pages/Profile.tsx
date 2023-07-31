@@ -18,7 +18,7 @@ function Page() {
     id: "",
     name: "아무개",
     team: "임시",
-    message: "상태메시지",
+    message: "최대 글자수 20개",
     number: 0,
     image:
       "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png",
@@ -56,7 +56,7 @@ function Page() {
             <div>
               <p className="profile-text">{user.number} 기</p>
               <p className="profile-text">{user.team} 팀 {user.name}</p>
-              <p className="message-text">{user.message}</p>
+              <p className="message-text">" {user.message} "</p>
             </div>
           </div>
 
