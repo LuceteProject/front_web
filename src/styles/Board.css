@@ -14,9 +14,8 @@
 }
 
 .custom-tab-link:disabled {
-  color: rgb(102, 100, 100)
+  color: rgb(102, 100, 100);
 }
-
 
 .custom-button {
   background-color: #6554a2;
@@ -25,5 +24,114 @@
   transition: background-color 0.2s; /* 애니메이션 효과를 추가 (선택사항) */
 }
 .custom-button:hover {
-  background-color: #D7BCDD; /* 호버 시 변경될 색상 */
+  background-color: #d7bcdd; /* 호버 시 변경될 색상 */
+}
+/* BoardPost.css */
+.post-page {
+  margin: 20px;
+  padding: 10px;
+}
+
+.board-type {
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  margin-top: 10px;
+}
+
+.post-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #000;
+}
+
+.timestamp {
+  font-size: 14px;
+  color: #777;
+  float: right;
+}
+
+.post-content {
+  margin-top: 20px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+  min-height: 200px;
+}
+.edit-buttons {
+  margin-left: auto;
+  float: right;
+}
+.edit-button,
+.delete-button {
+  background-color: #d7bcdd;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 5px;
+}
+.edit-button:hover {
+  color: #6554a2;
+}
+.delete-button:hover {
+  color: tomato;
+}
+
+.divider {
+  border-top: 1px solid #ccc;
+  width: 100%;
+  margin: 20px 0;
+}
+/* ReplyItem.css */
+
+.reply-item {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.reply-metadata {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #888;
+}
+
+.reply-author {
+  font-weight: bold;
+}
+
+.reply-content {
+  margin-top: 5px;
+}
+/* Reply input.css */
+
+.reply-input {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.reply-input input {
+  flex: 1;
+  padding: 5px;
+  border: none;
+  outline: none;
+}
+
+.reply-input button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  background-color: #6554a2;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
