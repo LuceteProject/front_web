@@ -1,11 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Dongle&family=Noto+Sans+KR:wght@400&display=swap');
+
 @font-face {
-	font-family: "googleOrbit";
-	src: url(./assets/fonts/Orbit-Regular.ttf);
+  font-family: "googleOrbit";
+  src: url(./assets/fonts/Orbit-Regular.ttf);
 }
+
 * {
   font-family: 'Noto Sans KR', sans-serif;
 }
+
 /* 
 body {
   margin: 0;
@@ -19,8 +22,9 @@ body {
 
 
 :root {
-	--font-googleOrbit: "googleOrbit";
+  --font-googleOrbit: "googleOrbit";
 }
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
@@ -28,5 +32,8 @@ code {
 
 .custom-button {
   background-color: rgb(153, 120, 193);
+  position: "sticky";
+  float: "right";
+  margin-top: 15px;
+  border: 1,
 }
-

@@ -53,6 +53,7 @@ const InputTodoItem = (props: InputTodoItemProps) => {
         type="text"
         placeholder="항목을 입력하세요"
         value={newTodo}
+        maxLength={30}
         onChange={(e) => onNewTodoChange(e.target.value)}
         onKeyDown={(e) => e.key === "Enter" && onAddTodo()}
       />
