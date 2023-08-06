@@ -12,6 +12,7 @@
   box-shadow: 0px 2px 4px rgba(101, 84, 162, 0.5); /* 그림자 설정 */
   background-color: #ffffff; /* 배경색 설정 */
   padding: 10px; /* 캘린더 내용과의 간격을 위한 padding 설정 */
+  margin-bottom: 10px;
 }
 /* modal.css */
 
@@ -67,4 +68,36 @@
 /* 모달 닫기 버튼 */
 .modal-content button:last-child {
   background-color: #ccc;
+}
+.cal-category {
+  width: 400px; /* 원하는 크기로 설정하세요 */
+  height: 35px; /* 원하는 크기로 설정하세요 */
+  /* 그 외의 스타일 설정 */
+  border-radius: 50px;
+  margin-bottom: 10px;
+
+
+}
+.title-text {
+  font-size: 22px;
+  color: "#fff";
+  padding-left: 20 
+}
+.input-text {
+  border: 1px solid #ccc;
+  border-radius: 10px; /* 테두리를 둥글게 만듭니다. */
+  padding: 2px 12px;
+  margin-right: 8px;
+  font-size: 16px;
+}
+
+.space-for-list {
+  min-height: 60px;
+}
+.custom-contents {
+  flex: 1;
+  flex-grow: 1;
+  min-height: 50px;
+  flex-direction: row;
+  font-size: 18px;
 }

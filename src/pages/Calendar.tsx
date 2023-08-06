@@ -4,7 +4,6 @@ import { Container, Row, Col, Button } from "react-bootstrap";
 import moment from "moment";
 import "react-calendar/dist/Calendar.css";
 import "../styles/Calendar.css";
-import "../styles/Todo.css";
 import { AddEvent } from "../components/Modal";
 import { Event } from "../types";
 
@@ -50,7 +49,8 @@ function Page() {
     <Container className="mt-4">
       <Row>
         <Col>
-          <h2>일정 관리 페이지</h2>
+          <h3>일정 관리 페이지</h3>
+          <p> 카테고리 별 일정을 추가하고 확인할 수 있습니다.</p>
         </Col>
       </Row>
       <Row className="mt-4">
@@ -75,60 +75,28 @@ function Page() {
               }
             }}
           />
-
+          <Button className="custom-button" onClick={handleAddEventClick}>
+            새 일정 추가
+          </Button>
           <p>선택된 날짜: {selectedDate.toDateString()}</p>
         </Col>
         <Col md={6}>
           <div className="custom-contents">
-            {/* 전체 */}
-
-            <div
-              style={{
-                backgroundColor: "#8056AA",
-              }}
-              className="todo-category"
-            >
-              <p
-                className="title-text"
-                style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
-              >
-                전체
-              </p>
-            </div>
-            {/* 팀 */}
-            <div
-              style={{
-                backgroundColor: "#9978C1",
-              }}
-              className="todo-category"
-            >
-              <p
-                className="title-text"
-                style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
-              >
-                팀
-              </p>
-            </div>
-            {/* 개인 */}
-            <div
-              style={{
-                backgroundColor: "#D5ADDF",
-              }}
-              className="todo-category"
-            >
-              <p
-                className="title-text"
-                style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
-              >
-                개인
-              </p>
-            </div>
-
-            {/* 이 곳에 선택된 날짜의 일정 정보를 표시할 컴포넌트 또는 기능을 추가할 수 있습니다 */}
-            <Button className="custom-button" onClick={handleAddEventClick}>
-              새 일정 추가
-            </Button>
+            <p className="cal-category title-text" style={{ backgroundColor: '#8056AA' }}>
+              📢 전체 </p>
+            <p> test </p>
+            <p> test </p>
+            <p> test </p>
           </div>
+          <div className="custom-contents">
+            <p className="cal-category title-text" style={{ backgroundColor: "#9978C1" }}>
+              ⚙️ 팀 </p>
+          </div>
+          <div className="custom-contents">
+            <p className="cal-category title-text" style={{ backgroundColor: "#D5ADDF" }}>
+              ✏️ 개인 </p>
+          </div>
+
         </Col>
         {/* 모달 */}
         <AddEvent

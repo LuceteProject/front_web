@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import "../styles/Todo.css"; // Board.css 파일에서 추가적인 스타일을 정의합니다.
-import { BrowserRouter as Router, Route } from "react-router-dom";
-import { FaRegCircle, FaRegCheckCircle, FaTimes, FaPlusCircle } from "react-icons/fa";
+import "../styles/Todo.css"; // Board.css 파일에서 추가적인 스타일을 정의합니다.\
+import { FaRegCircle, FaRegCheckCircle, FaTimes, FaMinus, FaPlusCircle } from "react-icons/fa";
 import { Todo } from "../types";
+
 type TodoCategory = "All" | "Team" | "Personal";
+
 interface TodoItemProps {
   item: Todo;
   category: TodoCategory;
@@ -27,14 +28,16 @@ const TodoItem = (props: TodoItemProps) => {
   const { color } = categoryStyles[category];
 
   return (
-    <div style={{ display: "flex", padding: 10 }}>
-      <div style={{ marginRight: 10 }}>{item.text}</div>
+    /* 완료된 항목들 정렬은 서버에서 받아올 때 정렬된 상태로 ? 리렌더링 문제 있긴함*/
+    <div style={{ display: "flex", marginTop: 12 }}>
       <FaRegCircle style={{ display: item.check ? 'none' : 'block' }} size={20} color={color} onClick={() => onChecked(item.id)} />
       <FaRegCheckCircle style={{ display: item.check ? 'block' : 'none' }} size={20} color={color} onClick={() => onChecked(item.id)} />
-      <FaTimes
+      
+      <div style={{ minWidth: 240, marginLeft: 5, marginRight: 5, }}>{item.text}</div>
+      <FaMinus
         className="remove-icon"
         size={20}
-        color="#ff4b6b"
+        color="#ccc"
         onClick={() => onDelete(item.id)}
       />
     </div>
@@ -47,7 +50,6 @@ const InputTodoItem = (props: InputTodoItemProps) => {
     <div className="input-todo">
       <input
         className="input-text"
-        style={{ marginRight: "10px", width: "360px" }}
         type="text"
         placeholder="항목을 입력하세요"
         value={newTodo}
@@ -56,7 +58,7 @@ const InputTodoItem = (props: InputTodoItemProps) => {
       />
       <FaPlusCircle
         style={{ color: "#D7BCDD" }}
-        size={30}
+        size={25}
         onClick={onAddTodo}
       />
     </div>
