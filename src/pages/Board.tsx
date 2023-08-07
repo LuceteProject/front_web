@@ -10,7 +10,7 @@ const dummyData: Post[] = [
     id: 1,
     header: 0,
     title: "게시글 제목1",
-    author_id:10211,
+    author_id: 10211,
     author_name: "작성자1",
     updated: "2023-07-21 12:30",
     content: "게시글 내용1",
@@ -22,7 +22,7 @@ const dummyData: Post[] = [
     id: 2,
     header: 0,
     title: "게시글 제목2",
-    author_id:10211,
+    author_id: 10211,
     author_name: "작성자2",
     updated: "2023-07-21 14:45",
     content: "게시글 내용2",
@@ -55,13 +55,19 @@ function Page() {
   };
   useEffect(() => {
     if (selectedPost) {
-      navigate(`/posts/${selectedPost.id}`); // 선택한 게시물의 id로 경로 설정
+      navigate(`/board/${selectedPost.id}`); // 선택한 게시물의 id로 경로 설정
     }
   }, [selectedPost]);
   return (
     <div style={{ paddingTop: "20px" }}>
       {/* 게시판 탭 */}
       <Tab.Container defaultActiveKey="first">
+        <Row>
+          <Col>
+            <h3 style={{ marginBottom: 40 }}>게시판 페이지</h3>
+
+          </Col>
+        </Row>
         <Row>
           <Col>
             <Nav
@@ -120,7 +126,7 @@ function Page() {
           </Col>
         </Row>
       </Tab.Container>
-      
+
     </div>
   );
 }

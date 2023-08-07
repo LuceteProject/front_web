@@ -26,14 +26,14 @@ function App() {
       <div className="page-wrapper">
         <Footer />
         <Routes>
-          <Route path="/" Component={Home} />
+          <Route path="/" Component={redirectToExternalURL} />
           <Route path="/board" Component={Board} />
           <Route path="/todolist" Component={Todolist} />
           <Route path="/calendar" Component={Calendar} />
           <Route path="/drive" Component={Drive} />
           <Route path="/profile" Component={Profile} />
 
-          <Route path="/posts/:postId" Component={BoardPost} />
+          <Route path="/board/:postId" Component={BoardPost} />
 
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
@@ -41,6 +41,12 @@ function App() {
     </Router>
   );
 }
+
+// http://54.237.121.196:8080/oauth2/authorization/naver
+const redirectToExternalURL = () => {
+  window.location.href = "http://54.237.121.196:8080/oauth2/authorization/naver";
+  return null;
+};
 function Home() {
   return (
     <div>
