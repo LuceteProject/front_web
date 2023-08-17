@@ -6,6 +6,7 @@ import "react-calendar/dist/Calendar.css";
 import "../styles/Calendar.css";
 import { AddEvent } from "../components/Modal";
 import { Event } from "../types";
+import { useMediaQuery } from 'react-responsive';
 
 //function for get Dates from API
 function fetchDate() {
@@ -45,8 +46,75 @@ function Page() {
     fetchDate();
   }, []);
 
+  const Horizontal: boolean = useMediaQuery({
+    query: "(min-width:850px)",
+  });
+
   return (
-    <Container className="mt-4">
+    <div>{Horizontal &&
+      <Container className="mt-4">
+        <Row>
+          <Col>
+            <h3>일정 관리 페이지</h3>
+            <p> 카테고리 별 일정을 추가하고 확인할 수 있습니다.</p>
+          </Col>
+        </Row>
+        <Row className="mt-4">
+          <Col md={6}>
+            <Calendar
+              className="custom-calendar"
+              onChange={handleDateChange as any}
+              formatDay={(locale, date) => moment(date).format("DD")}
+              value={selectedDate}
+              locale="ko-KR"
+              calendarType="gregory"
+              //style css 오버라이딩은 node_modules > react-calendar > dist > Calendar.css
+              tileContent={({ date, view }) => {
+                if (dates.find((x) => x === moment(date).format("YYYY-MM-DD"))) {
+                  return (
+                    <>
+                      <div className="flex justify-center items-center absoluteDiv">
+                        <div className="dot"></div>
+                      </div>
+                    </>
+                  );
+                }
+              }}
+            />
+            <Button className="custom-button" onClick={handleAddEventClick}>
+              새 일정 추가
+            </Button>
+            <p>선택된 날짜: {selectedDate.toDateString()}</p>
+          </Col>
+          <Col md={6}>
+            <div className="custom-contents">
+              <p className="cal-category title-text" style={{ backgroundColor: '#8056AA' }}>
+                📢 전체 </p>
+              <p> test </p>
+              <p> test </p>
+              <p> test </p>
+            </div>
+            <div className="custom-contents">
+              <p className="cal-category title-text" style={{ backgroundColor: "#9978C1" }}>
+                ⚙️ 팀 </p>
+            </div>
+            <div className="custom-contents">
+              <p className="cal-category title-text" style={{ backgroundColor: "#D5ADDF" }}>
+                ✏️ 개인 </p>
+            </div>
+
+          </Col>
+          {/* 모달 */}
+          <AddEvent
+            showModal={showModal}
+            handleCloseModal={() => setShowModal(false)}
+            onAddEvent={handleAddEvent}
+          />
+        </Row>
+      </Container>
+    }
+    {!Horizontal &&
+      <Container className="mt-4">
       <Row>
         <Col>
           <h3>일정 관리 페이지</h3>
@@ -80,7 +148,7 @@ function Page() {
           </Button>
           <p>선택된 날짜: {selectedDate.toDateString()}</p>
         </Col>
-        <Col md={6}>
+        <Row>
           <div className="custom-contents">
             <p className="cal-category title-text" style={{ backgroundColor: '#8056AA' }}>
               📢 전체 </p>
@@ -97,7 +165,7 @@ function Page() {
               ✏️ 개인 </p>
           </div>
 
-        </Col>
+        </Row>
         {/* 모달 */}
         <AddEvent
           showModal={showModal}
@@ -106,6 +174,8 @@ function Page() {
         />
       </Row>
     </Container>
+    }
+    </div>
   );
 }
 

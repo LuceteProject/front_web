@@ -1,8 +1,8 @@
 /* 전체 페이지 컨테이너에 양 옆 여백을 20%로 설정 */
 .page-wrapper {
-  margin: 0 10%;
+  margin: 0 5%;
   margin: 10 auto; /* 수평 가운데 정렬 */
-  min-width: 800px; /* 최소 너비 */
+  /*min-width: 800px;  최소 너비 */
   padding-bottom: 60px;
 }
 

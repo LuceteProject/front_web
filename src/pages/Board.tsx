@@ -4,6 +4,8 @@ import { Container, Row, Col, Button, Nav, Tab } from "react-bootstrap";
 import { PostListItem } from "../components/Posts";
 import "../styles/Board.css";
 import { Post } from "../types";
+import { useMediaQuery } from 'react-responsive';
+
 
 const dummyData: Post[] = [
   {
@@ -33,7 +35,7 @@ const dummyData: Post[] = [
   // 더미데이터 추가
 ];
 
-function Page() {
+function Page(): JSX.Element {
   const navigate = useNavigate(); // useNavigate 훅 사용
   // 게시판 목록 상태
   const [posts, setPosts] = useState<Post[]>([]);
@@ -58,8 +60,17 @@ function Page() {
       navigate(`/board/${selectedPost.id}`); // 선택한 게시물의 id로 경로 설정
     }
   }, [selectedPost]);
+
+  //반응형 웹
+  const isDesktop: boolean = useMediaQuery({
+    query: "(min-width:950px)",
+  });
+
+
   return (
-    <div style={{ paddingTop: "20px" }}>
+    <div>
+      {
+      <div style={{ paddingTop: "20px" }}>
       {/* 게시판 탭 */}
       <Tab.Container defaultActiveKey="first">
         <Row>
@@ -126,6 +137,8 @@ function Page() {
           </Col>
         </Row>
       </Tab.Container>
+
+      </div>}
 
     </div>
   );

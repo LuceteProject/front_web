@@ -62,8 +62,8 @@ function Footer() {
   return (
     <Container fluid className="bottom-tab-nav">
       <Row className="bottom-tab-row">
-        <Col sm={2} md={3} />
-        <Col sm={8} md={6}>
+        <Col sm={2} md={2} />
+        <Col sm={9} md={8}>
           <Nav fill>
             <Nav.Item className="bottom-tab-item">
               <Nav.Link as={Link} to="/board" eventKey="board">

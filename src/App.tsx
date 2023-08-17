@@ -107,7 +107,7 @@ function App() {
 // http://54.237.121.196:8080/oauth2/authorization/naver
 const redirectToExternalURL = () => {
   window.location.href =
-    "http://54.237.121.196:8080/oauth2/authorization/naver";
+    "http://localhost:3000/board";
   return null;
 };
 export default App;
