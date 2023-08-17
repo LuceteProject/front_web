@@ -18,6 +18,7 @@ import Drive from "./pages/Drive";
 import Profile from "./pages/Profile";
 import Todolist from "./pages/Todolist";
 import BoardPost from "./pages/BoardPost";
+import { Button } from "react-bootstrap";
 
 function App() {
   return (
@@ -26,7 +27,8 @@ function App() {
       <div className="page-wrapper">
         <Footer />
         <Routes>
-          <Route path="/" Component={redirectToExternalURL} />
+          {/* URL 형식 : http://localhost:3000/board */}
+          <Route path="/" Component={Home} />
           <Route path="/board" Component={Board} />
           <Route path="/todolist" Component={Todolist} />
           <Route path="/calendar" Component={Calendar} />
@@ -49,8 +51,15 @@ const redirectToExternalURL = () => {
 };
 function Home() {
   return (
-    <div>
-      <h2>Home Screen</h2>
+    <div className="container">
+      <div className="text-center mt-5">
+        <h1 style={{marginBottom: 50}}>Welcome to Lucete!</h1>
+        <p>로그인하려면 아래 버튼을 누르세요.</p>
+        <p>네이버 아이디가 필요합니다.</p>
+        <Button className="custom-button" onClick={redirectToExternalURL}>
+          로그인 
+        </Button>
+      </div>
     </div>
   );
 }
