@@ -4,6 +4,7 @@ import axios from "axios";
 import "../styles/Board.css";
 import { Post, Reply } from "../types";
 import { ReplyItem, ReplyInput } from "../components/Posts";
+import { fetchData } from '../utils/api';
 
 const dummyData: Post = {
   id: 1,
@@ -24,39 +25,19 @@ const Page = () => {
   const [replies, setReplies] = useState<Reply[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get<Post>(
-          `http://210.96.102.143:8080/api/v1/posts/${postId}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        setPost(response.data);
-      } catch (e) {
-        console.log(e);
-      }
+    const fetchPostData = async () => {
+      const postData = await fetchData('/api/postData');
+      setPost(postData);
     };
-    //fetchData();
-    console.log("API calling...");
+    const fetchReplyData = async () => {
+      const replyData = await fetchData('/api/replyData');
+      setReplies(replyData);
+    };
+    //아직 404에러 - 게시글이랑 댓글 모두 따로 달아야 하는지?
+    //fetchPostData();
+    //fetchReplyData();
   }, []);
 
-  // 더미데이터를 받아오는 API 호출 시뮬레이션 (postId가 API로부터 받아온 게시글 id라고 가정)
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get<Reply[]>(
-          `http://210.96.102.143:8080/api/v1/posts/${postId}/replies`
-        );
-        setReplies(response.data);
-      } catch (e) {
-        console.log(e);
-      }
-    };
-    fetchData();
-  }, []);
 
   const Main = ({ post }: { post: Post }) => {
     const isAuthor = post.author_id === 10211; // 작성자 ID를 여기에 넣어주세요

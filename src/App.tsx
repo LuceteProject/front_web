@@ -21,7 +21,8 @@ import BoardPost from "./pages/BoardPost";
 import { Button } from "react-bootstrap";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   // 로그인 후 페이지 보고 싶으면 isLoggedIn 변수 true로 변경
   const handleNaverLogin = (response: any) => {
     if (response) {
@@ -92,11 +93,6 @@ function App() {
                 로그인
               </Button>
               <div />
-              {/* 
-          <Button className="custom-button" disabled={!isLoggedIn}>
-            로그아웃
-          </Button>
-          */}
             </div>
           </div>
         )}
@@ -107,7 +103,7 @@ function App() {
 // http://54.237.121.196:8080/oauth2/authorization/naver
 const redirectToExternalURL = () => {
   window.location.href =
-    "http://54.237.121.196:8080/oauth2/authorization/naver";
+    process.env.REACT_APP_API_IP + "oauth2/authorization/naver";
   return null;
 };
 export default App;

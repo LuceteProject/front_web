@@ -1,15 +1,7 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import {
-  FaThList,
-  FaTasks,
-  FaCalendarAlt,
-  FaGoogleDrive,
-  FaUser,
-  FaBell,
-} from "react-icons/fa";
+import { fetchData } from '../utils/api';
 import { User } from "../types";
 import "../styles/Profile.css";
 
@@ -25,23 +17,13 @@ function Page() {
   });
   // Fetch User Information from API
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get<User>(
-          "http://210.96.102.143:8080/api/v1/users/1",
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        setUser(response.data);
-      } catch (error) {
-        console.log(error);
-      }
+    const fetchUserData = async () => {
+      const postData = await fetchData('/api/post'); //확인 필요
+      setUser(postData);
     };
-    fetchData();
+    //fetchUserData();
   }, []);
+
 
   return (
     <Container className="content-wrapper">

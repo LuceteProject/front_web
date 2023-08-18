@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { Col, Container, Form, Row } from "react-bootstrap";
+import { useMediaQuery } from "react-responsive";
+import { fetchData } from "../utils/api";
+
 import { Todo } from "../types";
 import { TodoItem, InputTodoItem } from "../components/TodoItem";
-import { Col, Container, Form, Row } from "react-bootstrap";
 import "../styles/Todo.css"; // Board.css 파일에서 추가적인 스타일을 정의합니다.
-import { useMediaQuery } from 'react-responsive';
 
 function Page() {
   const [todos, setTodos] = useState<Todo[]>([]);
@@ -13,6 +15,14 @@ function Page() {
   const [newTodoPersonal, setNewTodoPersonal] = useState("");
   const [category, setCategory] = useState("All");
   const [checked, setChecked] = useState(false);
+
+  useEffect(() => {
+    const fetchTodoData = async () => {
+      const response = await fetchData("/api/todoItem"); //확인 필요
+      setTodos(response);
+    };
+    //fetchTodoData();
+  }, []);
 
   const handleAddTodo = () => {
     let newTodo = "";
@@ -68,402 +78,392 @@ function Page() {
   });
   return (
     <div>
-      {Pormation_1 &&
-    <Container className="mt-4">
-      <Row>
-        <Col>
-          <h3>투두리스트</h3>
-          <p> 카테고리 별 작업을 추가하고 완료 등의 상태를 관리할 수 있습니다.</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={6} md={4}>
-          {/* 전체 투두리스트 */}
-          <div
-            style={{
-              backgroundColor: "#8056AA",
-            }}
-            className="todo-category"
-          >
-            <p
-              className="title-text"
-              style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
+      {Pormation_1 && (
+        <Container className="mt-4">
+          <Row>
+            <Col>
+              <h3>투두리스트</h3>
+              <p>
+                {" "}
+                카테고리 별 작업을 추가하고 완료 등의 상태를 관리할 수 있습니다.
+              </p>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={6} md={4}>
+              {/* 전체 투두리스트 */}
+              <div
+                style={{
+                  backgroundColor: "#8056AA",
+                }}
+                className="todo-category"
+              >
+                <p
+                  className="title-text"
+                  style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
+                >
+                  📢 전체
+                </p>
+              </div>
+              <InputTodoItem
+                newTodo={newTodoAll}
+                onNewTodoChange={setNewTodoAll}
+                onAddTodo={() => {
+                  handleAddTodo();
+                  setCategory("All");
+                }}
+              />
+              <div className="space-for-list">
+                {todos
+                  .filter((todo) => todo.category === "All")
+                  .map((item) => (
+                    <TodoItem
+                      key={item.id}
+                      item={item}
+                      category="All"
+                      onChecked={handleToggleTodo}
+                      onDelete={handleDeleteTodo}
+                    />
+                  ))}
+              </div>
+            </Col>
+            <Col xs={6} md={4}>
+              {/* 팀 투두리스트 */}
+              <div
+                style={{
+                  backgroundColor: "#9978C1",
+                }}
+                className="todo-category"
+              >
+                <p
+                  className="title-text"
+                  style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
+                >
+                  ⚙️ 팀
+                </p>
+              </div>
+              <InputTodoItem
+                newTodo={newTodoTeam}
+                onNewTodoChange={setNewTodoTeam}
+                onAddTodo={() => {
+                  handleAddTodo();
+                  setCategory("Team");
+                }}
+              />
+              <div className="space-for-list">
+                {todos
+                  .filter((todo) => todo.category === "Team")
+                  .map((item) => (
+                    <TodoItem
+                      key={item.id}
+                      item={item}
+                      category="Team"
+                      onChecked={handleToggleTodo}
+                      onDelete={handleDeleteTodo}
+                    />
+                  ))}
+              </div>
+            </Col>
+            <Col xs={6} md={4}>
+              {/* 개인 투두리스트 */}
+              <div
+                style={{
+                  backgroundColor: "#D5ADDF",
+                }}
+                className="todo-category"
+              >
+                <p
+                  className="title-text"
+                  style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
+                >
+                  ✏️ 개인
+                </p>
+              </div>
+              <InputTodoItem
+                newTodo={newTodoPersonal}
+                onNewTodoChange={setNewTodoPersonal}
+                onAddTodo={() => {
+                  handleAddTodo();
+                  setCategory("Personal");
+                }}
+              />
+              <div className="space-for-list">
+                {todos
+                  .filter((todo) => todo.category === "Personal")
+                  .map((item) => (
+                    <TodoItem
+                      key={item.id}
+                      item={item}
+                      category="Personal"
+                      onChecked={handleToggleTodo}
+                      onDelete={handleDeleteTodo}
+                    />
+                  ))}
+              </div>
+            </Col>
+          </Row>
+
+          <div style={{ flex: 1, backgroundColor: "#fff" }}></div>
+        </Container>
+      )}
+      {Pormation_2 && !Pormation_1 && (
+        <Container className="mt-4">
+          <Row>
+            <Col>
+              <h3>투두리스트</h3>
+              <p>
+                {" "}
+                카테고리 별 작업을 추가하고 완료 등의 상태를 관리할 수 있습니다.
+              </p>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={8} md={6}>
+              {/* 전체 투두리스트 */}
+              <div
+                style={{
+                  backgroundColor: "#8056AA",
+                }}
+                className="todo-category"
+              >
+                <p
+                  className="title-text"
+                  style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
+                >
+                  📢 전체
+                </p>
+              </div>
+              <InputTodoItem
+                newTodo={newTodoAll}
+                onNewTodoChange={setNewTodoAll}
+                onAddTodo={() => {
+                  handleAddTodo();
+                  setCategory("All");
+                }}
+              />
+              <div className="space-for-list">
+                {todos
+                  .filter((todo) => todo.category === "All")
+                  .map((item) => (
+                    <TodoItem
+                      key={item.id}
+                      item={item}
+                      category="All"
+                      onChecked={handleToggleTodo}
+                      onDelete={handleDeleteTodo}
+                    />
+                  ))}
+              </div>
+            </Col>
+            <Col xs={8} md={6}>
+              {/* 팀 투두리스트 */}
+              <div
+                style={{
+                  backgroundColor: "#9978C1",
+                }}
+                className="todo-category"
+              >
+                <p
+                  className="title-text"
+                  style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
+                >
+                  ⚙️ 팀
+                </p>
+              </div>
+              <InputTodoItem
+                newTodo={newTodoTeam}
+                onNewTodoChange={setNewTodoTeam}
+                onAddTodo={() => {
+                  handleAddTodo();
+                  setCategory("Team");
+                }}
+              />
+              <div className="space-for-list">
+                {todos
+                  .filter((todo) => todo.category === "Team")
+                  .map((item) => (
+                    <TodoItem
+                      key={item.id}
+                      item={item}
+                      category="Team"
+                      onChecked={handleToggleTodo}
+                      onDelete={handleDeleteTodo}
+                    />
+                  ))}
+              </div>
+            </Col>
+          </Row>
+          <Col xs={8} md={6}>
+            {/* 개인 투두리스트 */}
+            <div
+              style={{
+                backgroundColor: "#D5ADDF",
+              }}
+              className="todo-category"
             >
-              📢 전체
-            </p>
-          </div>
-          <InputTodoItem
-            newTodo={newTodoAll}
-            onNewTodoChange={setNewTodoAll}
-            onAddTodo={() => {
-              handleAddTodo();
-              setCategory("All");
-            }}
-          />
-          <div className="space-for-list">
-            {todos
-              .filter((todo) => todo.category === "All")
-              .map((item) => (
-                <TodoItem
-                  key={item.id}
-                  item={item}
-                  category="All"
-                  onChecked={handleToggleTodo}
-                  onDelete={handleDeleteTodo}
-                />
-              ))}
-          </div>
+              <p
+                className="title-text"
+                style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
+              >
+                ✏️ 개인
+              </p>
+            </div>
+            <InputTodoItem
+              newTodo={newTodoPersonal}
+              onNewTodoChange={setNewTodoPersonal}
+              onAddTodo={() => {
+                handleAddTodo();
+                setCategory("Personal");
+              }}
+            />
+            <div className="space-for-list">
+              {todos
+                .filter((todo) => todo.category === "Personal")
+                .map((item) => (
+                  <TodoItem
+                    key={item.id}
+                    item={item}
+                    category="Personal"
+                    onChecked={handleToggleTodo}
+                    onDelete={handleDeleteTodo}
+                  />
+                ))}
+            </div>
+          </Col>
 
-        </Col>
-        <Col xs={6} md={4}>
-          {/* 팀 투두리스트 */}
-          <div
-            style={{
-              backgroundColor: "#9978C1",
-            }}
-            className="todo-category"
-          >
-            <p
-              className="title-text"
-              style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
+          <div style={{ flex: 1, backgroundColor: "#fff" }}></div>
+        </Container>
+      )}
+      {!Pormation_2 && (
+        <Container className="mt-4">
+          <Row>
+            <Col>
+              <h3>투두리스트</h3>
+              <p>
+                {" "}
+                카테고리 별 작업을 추가하고 완료 등의 상태를 관리할 수 있습니다.
+              </p>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={9} md={8}>
+              {/* 전체 투두리스트 */}
+              <div
+                style={{
+                  backgroundColor: "#8056AA",
+                }}
+                className="todo-category"
+              >
+                <p
+                  className="title-text"
+                  style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
+                >
+                  📢 전체
+                </p>
+              </div>
+              <InputTodoItem
+                newTodo={newTodoAll}
+                onNewTodoChange={setNewTodoAll}
+                onAddTodo={() => {
+                  handleAddTodo();
+                  setCategory("All");
+                }}
+              />
+              <div className="space-for-list">
+                {todos
+                  .filter((todo) => todo.category === "All")
+                  .map((item) => (
+                    <TodoItem
+                      key={item.id}
+                      item={item}
+                      category="All"
+                      onChecked={handleToggleTodo}
+                      onDelete={handleDeleteTodo}
+                    />
+                  ))}
+              </div>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={9} md={8}>
+              {/* 팀 투두리스트 */}
+              <div
+                style={{
+                  backgroundColor: "#9978C1",
+                }}
+                className="todo-category"
+              >
+                <p
+                  className="title-text"
+                  style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
+                >
+                  ⚙️ 팀
+                </p>
+              </div>
+              <InputTodoItem
+                newTodo={newTodoTeam}
+                onNewTodoChange={setNewTodoTeam}
+                onAddTodo={() => {
+                  handleAddTodo();
+                  setCategory("Team");
+                }}
+              />
+              <div className="space-for-list">
+                {todos
+                  .filter((todo) => todo.category === "Team")
+                  .map((item) => (
+                    <TodoItem
+                      key={item.id}
+                      item={item}
+                      category="Team"
+                      onChecked={handleToggleTodo}
+                      onDelete={handleDeleteTodo}
+                    />
+                  ))}
+              </div>
+            </Col>
+          </Row>
+          <Col xs={9} md={8}>
+            {/* 개인 투두리스트 */}
+            <div
+              style={{
+                backgroundColor: "#D5ADDF",
+              }}
+              className="todo-category"
             >
-              ⚙️ 팀
-            </p>
-          </div>
-          <InputTodoItem
-            newTodo={newTodoTeam}
-            onNewTodoChange={setNewTodoTeam}
-            onAddTodo={() => {
-              handleAddTodo();
-              setCategory("Team");
-            }}
-          />
-          <div className="space-for-list">
-            {todos
-              .filter((todo) => todo.category === "Team")
-              .map((item) => (
-                <TodoItem
-                  key={item.id}
-                  item={item}
-                  category="Team"
-                  onChecked={handleToggleTodo}
-                  onDelete={handleDeleteTodo}
-                />
-              ))}
-          </div>
- 
-        </Col>
-        <Col xs={6} md={4}>
-          {/* 개인 투두리스트 */}
-          <div
-            style={{
-              backgroundColor: "#D5ADDF",
-            }}
-            className="todo-category"
-          >
-            <p
-              className="title-text"
-              style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
-            >
-              ✏️ 개인
-            </p>
-          </div>
-          <InputTodoItem
-            newTodo={newTodoPersonal}
-            onNewTodoChange={setNewTodoPersonal}
-            onAddTodo={() => {
-              handleAddTodo();
-              setCategory("Personal");
-            }}
-          />
-          <div className="space-for-list">
-            {todos
-              .filter((todo) => todo.category === "Personal")
-              .map((item) => (
-                <TodoItem
-                  key={item.id}
-                  item={item}
-                  category="Personal"
-                  onChecked={handleToggleTodo}
-                  onDelete={handleDeleteTodo}
-                />
-              ))}
-          </div>
-        </Col>
-      </Row>
+              <p
+                className="title-text"
+                style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
+              >
+                ✏️ 개인
+              </p>
+            </div>
+            <InputTodoItem
+              newTodo={newTodoPersonal}
+              onNewTodoChange={setNewTodoPersonal}
+              onAddTodo={() => {
+                handleAddTodo();
+                setCategory("Personal");
+              }}
+            />
+            <div className="space-for-list">
+              {todos
+                .filter((todo) => todo.category === "Personal")
+                .map((item) => (
+                  <TodoItem
+                    key={item.id}
+                    item={item}
+                    category="Personal"
+                    onChecked={handleToggleTodo}
+                    onDelete={handleDeleteTodo}
+                  />
+                ))}
+            </div>
+          </Col>
 
-      <div style={{ flex: 1, backgroundColor: "#fff" }}>
-
-
-
-
-      </div>
-    </Container>
-      }
-      {Pormation_2 && !Pormation_1 &&
-      <Container className="mt-4">
-      <Row>
-        <Col>
-          <h3>투두리스트</h3>
-          <p> 카테고리 별 작업을 추가하고 완료 등의 상태를 관리할 수 있습니다.</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={8} md={6}>
-          {/* 전체 투두리스트 */}
-          <div
-            style={{
-              backgroundColor: "#8056AA",
-            }}
-            className="todo-category"
-          >
-            <p
-              className="title-text"
-              style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
-            >
-              📢 전체
-            </p>
-          </div>
-          <InputTodoItem
-            newTodo={newTodoAll}
-            onNewTodoChange={setNewTodoAll}
-            onAddTodo={() => {
-              handleAddTodo();
-              setCategory("All");
-            }}
-          />
-          <div className="space-for-list">
-            {todos
-              .filter((todo) => todo.category === "All")
-              .map((item) => (
-                <TodoItem
-                  key={item.id}
-                  item={item}
-                  category="All"
-                  onChecked={handleToggleTodo}
-                  onDelete={handleDeleteTodo}
-                />
-              ))}
-          </div>
-
-        </Col>
-        <Col xs={8} md={6}>
-          {/* 팀 투두리스트 */}
-          <div
-            style={{
-              backgroundColor: "#9978C1",
-            }}
-            className="todo-category"
-          >
-            <p
-              className="title-text"
-              style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
-            >
-              ⚙️ 팀
-            </p>
-          </div>
-          <InputTodoItem
-            newTodo={newTodoTeam}
-            onNewTodoChange={setNewTodoTeam}
-            onAddTodo={() => {
-              handleAddTodo();
-              setCategory("Team");
-            }}
-          />
-          <div className="space-for-list">
-            {todos
-              .filter((todo) => todo.category === "Team")
-              .map((item) => (
-                <TodoItem
-                  key={item.id}
-                  item={item}
-                  category="Team"
-                  onChecked={handleToggleTodo}
-                  onDelete={handleDeleteTodo}
-                />
-              ))}
-          </div>
- 
-        </Col>
-        </Row>
-        <Col xs={8} md={6}>
-          {/* 개인 투두리스트 */}
-          <div
-            style={{
-              backgroundColor: "#D5ADDF",
-            }}
-            className="todo-category"
-          >
-            <p
-              className="title-text"
-              style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
-            >
-              ✏️ 개인
-            </p>
-          </div>
-          <InputTodoItem
-            newTodo={newTodoPersonal}
-            onNewTodoChange={setNewTodoPersonal}
-            onAddTodo={() => {
-              handleAddTodo();
-              setCategory("Personal");
-            }}
-          />
-          <div className="space-for-list">
-            {todos
-              .filter((todo) => todo.category === "Personal")
-              .map((item) => (
-                <TodoItem
-                  key={item.id}
-                  item={item}
-                  category="Personal"
-                  onChecked={handleToggleTodo}
-                  onDelete={handleDeleteTodo}
-                />
-              ))}
-          </div>
-        </Col>
-
-      <div style={{ flex: 1, backgroundColor: "#fff" }}>
-
-
-
-
-      </div>
-    </Container>
-      }
-      {!Pormation_2 &&
-      
-      <Container className="mt-4">
-      <Row>
-        <Col>
-          <h3>투두리스트</h3>
-          <p> 카테고리 별 작업을 추가하고 완료 등의 상태를 관리할 수 있습니다.</p>
-        </Col>
-      </Row>
-      <Row>
-        <Col xs={9} md={8}>
-          {/* 전체 투두리스트 */}
-          <div
-            style={{
-              backgroundColor: "#8056AA",
-            }}
-            className="todo-category"
-          >
-            <p
-              className="title-text"
-              style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
-            >
-              📢 전체
-            </p>
-          </div>
-          <InputTodoItem
-            newTodo={newTodoAll}
-            onNewTodoChange={setNewTodoAll}
-            onAddTodo={() => {
-              handleAddTodo();
-              setCategory("All");
-            }}
-          />
-          <div className="space-for-list">
-            {todos
-              .filter((todo) => todo.category === "All")
-              .map((item) => (
-                <TodoItem
-                  key={item.id}
-                  item={item}
-                  category="All"
-                  onChecked={handleToggleTodo}
-                  onDelete={handleDeleteTodo}
-                />
-              ))}
-          </div>
-
-        </Col>
-        </Row>
-        <Row>
-        <Col xs={9} md={8}>
-          {/* 팀 투두리스트 */}
-          <div
-            style={{
-              backgroundColor: "#9978C1",
-            }}
-            className="todo-category"
-          >
-            <p
-              className="title-text"
-              style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
-            >
-              ⚙️ 팀
-            </p>
-          </div>
-          <InputTodoItem
-            newTodo={newTodoTeam}
-            onNewTodoChange={setNewTodoTeam}
-            onAddTodo={() => {
-              handleAddTodo();
-              setCategory("Team");
-            }}
-          />
-          <div className="space-for-list">
-            {todos
-              .filter((todo) => todo.category === "Team")
-              .map((item) => (
-                <TodoItem
-                  key={item.id}
-                  item={item}
-                  category="Team"
-                  onChecked={handleToggleTodo}
-                  onDelete={handleDeleteTodo}
-                />
-              ))}
-          </div>
- 
-        </Col>
-        </Row>
-        <Col xs={9} md={8}>
-          {/* 개인 투두리스트 */}
-          <div
-            style={{
-              backgroundColor: "#D5ADDF",
-            }}
-            className="todo-category"
-          >
-            <p
-              className="title-text"
-              style={{ fontSize: 22, color: "#fff", paddingLeft: 20 }}
-            >
-              ✏️ 개인
-            </p>
-          </div>
-          <InputTodoItem
-            newTodo={newTodoPersonal}
-            onNewTodoChange={setNewTodoPersonal}
-            onAddTodo={() => {
-              handleAddTodo();
-              setCategory("Personal");
-            }}
-          />
-          <div className="space-for-list">
-            {todos
-              .filter((todo) => todo.category === "Personal")
-              .map((item) => (
-                <TodoItem
-                  key={item.id}
-                  item={item}
-                  category="Personal"
-                  onChecked={handleToggleTodo}
-                  onDelete={handleDeleteTodo}
-                />
-              ))}
-          </div>
-        </Col>
-
-      <div style={{ flex: 1, backgroundColor: "#fff" }}>
-
-      </div>
-    </Container>
-    }
+          <div style={{ flex: 1, backgroundColor: "#fff" }}></div>
+        </Container>
+      )}
     </div>
   );
 }

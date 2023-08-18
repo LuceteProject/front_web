@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button, Nav, Tab } from "react-bootstrap";
-import { PostListItem } from "../components/Posts";
-import "../styles/Board.css";
-import { Post } from "../types";
 import { useMediaQuery } from 'react-responsive';
+import { fetchData } from '../utils/api';
+import { PostListItem } from "../components/Posts";
+import { Post } from "../types";
+
+import "../styles/Board.css";
 
 
 const dummyData: Post[] = [
@@ -45,6 +47,15 @@ function Page(): JSX.Element {
   useEffect(() => {
     setPosts(dummyData);
   }, []);
+
+  useEffect(() => {
+    const fetchPostsData = async () => {
+      const postData = await fetchData('/api/post'); //확인 필요
+      setPosts(postData);
+    };
+    //fetchPostsData();
+  }, []);
+
 
   // 게시글 클릭 이벤트 핸들러
   const handlePostItemClick = (postId: number) => {
