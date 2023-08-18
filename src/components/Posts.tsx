@@ -16,6 +16,10 @@ const dummyData: Post = {
 };
 
 const PostListItem = (props: any) => {
+  if (!props.posts) {
+    return null; // props.posts 값이 없을 경우 렌더링하지 않음
+  }
+
   return props.posts.map((post: Post) => (
     // 레이아웃 변경 필요
     <div
@@ -34,6 +38,9 @@ const PostListItem = (props: any) => {
 };
 
 const ReplyItem = ({ reply }: { reply: Reply }) => {
+  if (!reply) {
+    return null; // reply 값이 없을 경우 렌더링하지 않음
+  }
   // 댓글 목록
   return (
     <>
