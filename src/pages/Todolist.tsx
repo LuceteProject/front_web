@@ -9,30 +9,31 @@ import { TodoItem, InputTodoItem } from "../components/TodoItem";
 import "../styles/Todo.css"; // Board.css 파일에서 추가적인 스타일을 정의합니다.
 
 function Page() {
+
   const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodoAll, setNewTodoAll] = useState("");
   const [newTodoTeam, setNewTodoTeam] = useState("");
   const [newTodoPersonal, setNewTodoPersonal] = useState("");
-  const [category, setCategory] = useState("All");
-  const [checked, setChecked] = useState(false);
+  const [teamCode, setTeamCode] = useState(0);
 
   useEffect(() => {
+    const userId = 3; //현재 유저 아이디 가져와야 함
     const fetchTodoData = async () => {
-      const response = await fetchData("/api/todoItem"); //확인 필요
+      const response = await fetchData(`api/v1/todos/userID/${userId}`); //확인 필요
       setTodos(response);
     };
-    //fetchTodoData();
+    fetchTodoData();
   }, []);
 
   const handleAddTodo = () => {
     let newTodo = "";
-    if (category === "All") {
+    if (teamCode === 0) {
       newTodo = newTodoAll;
       setNewTodoAll("");
-    } else if (category === "Team") {
+    } else if (teamCode === 1) {
       newTodo = newTodoTeam;
       setNewTodoTeam("");
-    } else if (category === "Personal") {
+    } else if (teamCode === 2) {
       newTodo = newTodoPersonal;
       setNewTodoPersonal("");
     }
@@ -40,10 +41,10 @@ function Page() {
     if (newTodo) {
       const newTodoItem: Todo = {
         id: Date.now().toString(),
-        text: newTodo,
+        content: newTodo,
         completed: false,
-        category: category,
-        check: false,
+        team_code: teamCode,
+        user_id: 0
       };
       setTodos([...todos, newTodoItem]);
     }
@@ -60,7 +61,7 @@ function Page() {
  */
   const handleToggleTodo = (id: string) => {
     const updatedTodos = todos.map((todo) =>
-      todo.id === id ? { ...todo, check: !todo.check } : todo
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
     );
     setTodos(updatedTodos);
   };
@@ -110,12 +111,12 @@ function Page() {
                 onNewTodoChange={setNewTodoAll}
                 onAddTodo={() => {
                   handleAddTodo();
-                  setCategory("All");
+                  setTeamCode(0);
                 }}
               />
               <div className="space-for-list">
                 {todos
-                  .filter((todo) => todo.category === "All")
+                  .filter((todo) => todo.team_code === 0)
                   .map((item) => (
                     <TodoItem
                       key={item.id}
@@ -147,12 +148,12 @@ function Page() {
                 onNewTodoChange={setNewTodoTeam}
                 onAddTodo={() => {
                   handleAddTodo();
-                  setCategory("Team");
+                  setTeamCode(1);
                 }}
               />
               <div className="space-for-list">
                 {todos
-                  .filter((todo) => todo.category === "Team")
+                  .filter((todo) => todo.team_code === 1)
                   .map((item) => (
                     <TodoItem
                       key={item.id}
@@ -184,12 +185,12 @@ function Page() {
                 onNewTodoChange={setNewTodoPersonal}
                 onAddTodo={() => {
                   handleAddTodo();
-                  setCategory("Personal");
+                  setTeamCode(2);
                 }}
               />
               <div className="space-for-list">
                 {todos
-                  .filter((todo) => todo.category === "Personal")
+                  .filter((todo) => todo.team_code === 2)
                   .map((item) => (
                     <TodoItem
                       key={item.id}
@@ -238,12 +239,12 @@ function Page() {
                 onNewTodoChange={setNewTodoAll}
                 onAddTodo={() => {
                   handleAddTodo();
-                  setCategory("All");
+                  setTeamCode(0);
                 }}
               />
               <div className="space-for-list">
                 {todos
-                  .filter((todo) => todo.category === "All")
+                  .filter((todo) => todo.team_code === 0)
                   .map((item) => (
                     <TodoItem
                       key={item.id}
@@ -275,12 +276,12 @@ function Page() {
                 onNewTodoChange={setNewTodoTeam}
                 onAddTodo={() => {
                   handleAddTodo();
-                  setCategory("Team");
+                  setTeamCode(1);
                 }}
               />
               <div className="space-for-list">
                 {todos
-                  .filter((todo) => todo.category === "Team")
+                  .filter((todo) => todo.team_code === 1)
                   .map((item) => (
                     <TodoItem
                       key={item.id}
@@ -313,12 +314,12 @@ function Page() {
               onNewTodoChange={setNewTodoPersonal}
               onAddTodo={() => {
                 handleAddTodo();
-                setCategory("Personal");
+                setTeamCode(2);
               }}
             />
             <div className="space-for-list">
               {todos
-                .filter((todo) => todo.category === "Personal")
+                .filter((todo) => todo.team_code === 2)
                 .map((item) => (
                   <TodoItem
                     key={item.id}
@@ -366,12 +367,12 @@ function Page() {
                 onNewTodoChange={setNewTodoAll}
                 onAddTodo={() => {
                   handleAddTodo();
-                  setCategory("All");
+                  setTeamCode(0);
                 }}
               />
               <div className="space-for-list">
                 {todos
-                  .filter((todo) => todo.category === "All")
+                  .filter((todo) => todo.team_code === 0)
                   .map((item) => (
                     <TodoItem
                       key={item.id}
@@ -405,12 +406,12 @@ function Page() {
                 onNewTodoChange={setNewTodoTeam}
                 onAddTodo={() => {
                   handleAddTodo();
-                  setCategory("Team");
+                  setTeamCode(1);
                 }}
               />
               <div className="space-for-list">
                 {todos
-                  .filter((todo) => todo.category === "Team")
+                  .filter((todo) => todo.team_code === 1)
                   .map((item) => (
                     <TodoItem
                       key={item.id}
@@ -443,12 +444,12 @@ function Page() {
               onNewTodoChange={setNewTodoPersonal}
               onAddTodo={() => {
                 handleAddTodo();
-                setCategory("Personal");
+                setTeamCode(2);
               }}
             />
             <div className="space-for-list">
               {todos
-                .filter((todo) => todo.category === "Personal")
+                .filter((todo) => todo.team_code === 2)
                 .map((item) => (
                   <TodoItem
                     key={item.id}

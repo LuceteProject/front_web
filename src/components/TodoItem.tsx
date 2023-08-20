@@ -4,6 +4,11 @@ import { FaRegCircle, FaRegCheckCircle, FaTimes, FaMinus, FaPlusCircle } from "r
 import { Todo } from "../types";
 
 type TodoCategory = "All" | "Team" | "Personal";
+const serverCategoryToClientCategory: { [key: number]: TodoCategory } = {
+  0: "All",
+  1: "Team",
+  2: "Personal",
+};
 
 interface TodoItemProps {
   item: Todo;
@@ -30,10 +35,10 @@ const TodoItem = (props: TodoItemProps) => {
   return (
     /* 완료된 항목들 정렬은 서버에서 받아올 때 정렬된 상태로 ? 리렌더링 문제 있긴함*/
     <div style={{ display: "flex", marginTop: 12 }}>
-      <FaRegCircle style={{ display: item.check ? 'none' : 'block' }} size={20} color={color} onClick={() => onChecked(item.id)} />
-      <FaRegCheckCircle style={{ display: item.check ? 'block' : 'none' }} size={20} color={color} onClick={() => onChecked(item.id)} />
+      <FaRegCircle style={{ display: item.completed ? 'none' : 'block' }} size={20} color={color} onClick={() => onChecked(item.id)} />
+      <FaRegCheckCircle style={{ display: item.completed ? 'block' : 'none' }} size={20} color={color} onClick={() => onChecked(item.id)} />
       
-      <div style={{ minWidth: 240, marginLeft: 5, marginRight: 5, }}>{item.text}</div>
+      <div style={{ minWidth: 240, marginLeft: 5, marginRight: 5, }}>{item.content}</div>
       <FaMinus
         className="remove-icon"
         size={20}

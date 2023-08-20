@@ -1,9 +1,10 @@
 export type Todo = {
   id: string;
-  text: string;
+  content: string;
+  user_id: number;
+  team_code: number;
   completed: boolean;
-  category: string;
-  check: boolean;
+  //checked: boolean;
 };
 export type TodoCategory = "All" | "Team" | "Personal";
 
