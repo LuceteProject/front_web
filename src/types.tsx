@@ -13,18 +13,24 @@ export type Post = {
   title: string;
   author_id: number;
   author_name: string;
+  created: string;
   updated: string;
   content: string;
   permission: number;
   is_notice: false;
-  board_id: 0;
+  board_id: number;
 };
 
 export type Reply = {
   id: number;
-  author_name: string;
   content: string;
   created: string;
+  updated: string;
+  post_id : number;
+  user_id : string;
+  parent: any;
+  is_deleted: boolean;
+
 };
 
 export type User = {
