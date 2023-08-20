@@ -37,10 +37,16 @@ export type Reply = {
 export type User = {
   id: any;
   name: string; // 이름
+  google_id : string;
+  email: string;
+  phone : string;
   team: string; // 소속
-  message: string; //profile message
-  number: number; //기수(논의필요)
-  image: string; //profile image(논의필요)
+  status : boolean;
+  semester: number; //기수(논의필요)
+  team_code : number;
+  permission : number;
+  profile_message?: string; //profile message
+  image?: string; //profile image(논의필요)
 };
 
 export type Event = {
