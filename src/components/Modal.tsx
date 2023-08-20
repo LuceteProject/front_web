@@ -37,11 +37,13 @@ const AddEvent = ({ showModal, handleCloseModal, onAddEvent }: ModalProps) => {
 
   const handleAddEventClick = () => {
     onAddEvent({
-      id: 1, // 이벤트 ID 등을 여기에 지정해주어야 합니다.
+      id: 18,
       title: "이벤트 제목",
-      date: "2023-07-28",
-      startTime: "14:00",
-      endTime: "16:00",
+      content: "2023-07-28",
+      start: "14:00",
+      end: "16:00",
+      user_id: 1, //수정 필요
+      team_code: 0 //수정 필요
     });
   };
   return (

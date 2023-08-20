@@ -51,8 +51,11 @@ export type User = {
 
 export type Event = {
   id: number;
+  user_id : number;
   title: string;
-  date: string;
-  startTime: string;
-  endTime: string;
+  content: string;
+  team_code: number;
+  start: string;
+  end: string;
+  alarm?: string;
 };

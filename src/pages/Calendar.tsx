@@ -5,6 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import Calendar from "react-calendar";
 import moment from "moment";
 
+import { EventListItem } from "../components/Events";
 import { AddEvent } from "../components/Modal";
 import { Event } from "../types";
 
@@ -22,10 +23,12 @@ function Page() {
   const [items, setItems] = useState<Event[]>([]);
   useEffect(() => {
     const fetchItemData = async () => {
-      const postData = await fetchData("/api/endpoint"); //확인 필요
+      const userId = 1;
+      const postData = await fetchData(`api/v1/schedules/userID/${userId}`); //확인 필요
       setItems(postData);
+      //console.log(postData);
     };
-    //fetchItemData();
+    fetchItemData();
   }, []);
 
   /* 일정 추가 모달 */
@@ -100,9 +103,7 @@ function Page() {
                 >
                   📢 전체{" "}
                 </p>
-                <p> test </p>
-                <p> test </p>
-                <p> test </p>
+                <EventListItem events={items.filter(item => item.team_code === 123)} />
               </div>
               <div className="custom-contents">
                 <p
@@ -111,6 +112,7 @@ function Page() {
                 >
                   ⚙️ 팀{" "}
                 </p>
+                <EventListItem events={items.filter(item => item.team_code === 2)} />
               </div>
               <div className="custom-contents">
                 <p
@@ -119,6 +121,7 @@ function Page() {
                 >
                   ✏️ 개인{" "}
                 </p>
+                <EventListItem events={items.filter(item => item.team_code === 3)} />
               </div>
             </Col>
             {/* 모달 */}
@@ -175,9 +178,7 @@ function Page() {
                 >
                   📢 전체{" "}
                 </p>
-                <p> test </p>
-                <p> test </p>
-                <p> test </p>
+                <EventListItem events={items.filter(item => item.team_code === 123)} />
               </div>
               <div className="custom-contents">
                 <p
@@ -186,6 +187,7 @@ function Page() {
                 >
                   ⚙️ 팀{" "}
                 </p>
+                <EventListItem events={items.filter(item => item.team_code === 2)} />
               </div>
               <div className="custom-contents">
                 <p
@@ -194,6 +196,7 @@ function Page() {
                 >
                   ✏️ 개인{" "}
                 </p>
+                <EventListItem events={items.filter(item => item.team_code === 3)} />
               </div>
             </Row>
             {/* 모달 */}
