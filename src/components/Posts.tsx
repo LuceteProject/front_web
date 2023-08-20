@@ -2,19 +2,6 @@ import { useState } from "react";
 import "../styles/Board.css";
 import { Post, Reply } from "../types";
 
-const dummyData: Post = {
-  id: 1,
-  header: 0,
-  title: "게시글 제목1",
-  author_id: 10211,
-  author_name: "작성자1",
-  updated: "2023-07-21 12:30",
-  content: "게시글 내용1",
-  permission: 3,
-  is_notice: false,
-  board_id: 0,
-};
-
 const PostListItem = (props: any) => {
   if (!props.posts) {
     return null; // props.posts 값이 없을 경우 렌더링하지 않음
@@ -46,7 +33,7 @@ const ReplyItem = ({ reply }: { reply: Reply }) => {
     <>
       <div className="reply-item">
         <div className="reply-metadata">
-          <span className="reply-author">{reply.author_name}</span>
+          <span className="reply-author">{reply.user_id}</span>
           <span className="reply-timestamp">{reply.created}</span>
         </div>
         <p className="reply-content">{reply.content}</p>

@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import axios from "axios";
 import "../styles/Board.css";
 import { Post, Reply } from "../types";
 import { ReplyItem, ReplyInput } from "../components/Posts";
@@ -12,11 +11,18 @@ const dummyData: Post = {
   title: "게시글 제목1",
   author_id: 10211,
   author_name: "작성자1",
+  created: "2023-07-21 12:30",
   updated: "2023-07-21 12:30",
   content: "게시글 내용1",
   permission: 3,
   is_notice: false,
   board_id: 0,
+};
+/* 서버에서 받아온 board_id값에 따라 게시판 종류 표시*/
+const boardIdToName: { [key: number]: string } = {
+  1: '자유게시판',
+  2: '익명게시판',
+  3: '임원진 게시판',
 };
 
 const Page = () => {
@@ -26,16 +32,16 @@ const Page = () => {
 
   useEffect(() => {
     const fetchPostData = async () => {
-      const postData = await fetchData('/api/postData');
+      console.log(postId);
+      const postData = await fetchData(`api/v1/posts/${postId}`);
       setPost(postData);
     };
     const fetchReplyData = async () => {
-      const replyData = await fetchData('/api/replyData');
+      const replyData = await fetchData(`api/v1/comments/postID/${postId}`);
       setReplies(replyData);
     };
-    //아직 404에러 - 게시글이랑 댓글 모두 따로 달아야 하는지?
-    //fetchPostData();
-    //fetchReplyData();
+    fetchPostData();
+    fetchReplyData();
   }, []);
 
 
@@ -44,8 +50,8 @@ const Page = () => {
 
     return (
       <>
-        <p className="board-type">[게시판] {post.board_id}</p>
-        <h2 className="post-title">[제목] {post.title}</h2>
+        <p className="board-type">{boardIdToName[post.board_id]}</p>
+        <h2 className="post-title">{post.title}</h2>
         {/* 작성자가 본인인 경우에만 수정, 삭제 버튼 보이도록 처리 */}
         {isAuthor && (
           <div className="edit-buttons">
@@ -66,9 +72,13 @@ const Page = () => {
   function addReply(content: string): void {
     const newReply: Reply = {
       id: replies.length + 1,
-      author_name: "댓글 작성자",
       content: content,
       created: new Date().toLocaleString("ko-KR"),
+      updated: new Date().toLocaleString("Ko-KR"),
+      post_id: 1,
+      user_id: "댓글 작성자",
+      parent: null,
+      is_deleted: false
     };
 
     setReplies((prevReplies) => [...prevReplies, newReply]);
