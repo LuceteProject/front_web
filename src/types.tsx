@@ -59,3 +59,13 @@ export type Event = {
   end: string;
   alarm?: string;
 };
+
+export interface Member {
+  id: number;
+  profileImage?: string;
+  name: string;
+  semester: number;
+  team: string;
+  phone: string;
+  profile_message: string;
+};

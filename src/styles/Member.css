@@ -1,0 +1,62 @@
+.member-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 10px;
+}
+
+.member-item {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  min-width: 500px;
+  margin: 10px;
+}
+
+.member-details {
+  margin-left: 20px;
+}
+
+.member-details h3 {
+  margin: 0;
+}
+
+.member-details p {
+  margin: 5px 0;
+}
+.profile-view {
+  display: flex;
+  flex-direction: row;
+
+  background-color: white;
+  align-items: center;
+}
+
+.profile-image {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 30px;
+}
+.profile-details {
+  display: flex;
+  flex-direction: column;
+}
+.profile-text {
+  font-size: 18px;
+  color: #000;
+}
+.profile-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #000;
+}
+.profile-info {
+  font-size: 1rem;
+  margin: 5px 0;
+}
+.message-text {
+  font-size: 18px;
+  color: #6554a2;
+  font-family: "Dongle";
+}

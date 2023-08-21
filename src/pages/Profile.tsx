@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import { fetchData } from '../utils/api';
+import { Link, useNavigate } from "react-router-dom";
+import { fetchData } from "../utils/api";
 import { User } from "../types";
+
+import MemberListPage from "./settings/MemberList";
 import "../styles/Profile.css";
 
 function Page() {
+  const navigate = useNavigate(); // useNavigate 훅 사용
   const [user, setUser] = useState<User>({
     id: "",
     name: "아무개",
@@ -31,37 +34,50 @@ function Page() {
     fetchUserData();
   }, []);
 
-
   return (
     <Container className="content-wrapper">
       <Row>
         <Col>
           {/* Profile Information */}
           <div className="profile-view">
-            <img className="profile-image"
+            <img
+              className="profile-image"
               src={user.image}
               alt="profile-image"
             />
             <div>
               <p className="profile-text">{user.semester} 기</p>
-              <p className="profile-text">{user.team} 팀 {user.name}</p>
+              <p className="profile-text">
+                {user.team} 팀 {user.name}
+              </p>
               <p className="message-text">" {user.profile_message} "</p>
             </div>
           </div>
 
           {/* Navigation Buttons */}
           <div>
-            <Button className="setting-button">
-              <Link to="/attendance" className="link-text">출석확인</Link>
+            <Button
+              className="setting-button"
+              onClick={() => {
+                navigate(`/profile/attendance`);
+              }}
+            >
+                출석확인
             </Button>
-            <Button className="setting-button">
-              <Link to="/memberlist" className="link-text">부원목록</Link>
+            <Button
+              className="setting-button"
+              onClick={() => {
+                navigate(`/profile/memberlist`);
+              }}
+            >
+              <Link to="/memberlist" className="link-text">
+                부원목록
+              </Link>
             </Button>
             <p>다른 기능은 모바일에서만 지원됩니다.</p>
             <p>모바일에서 확인해주세요 🥰</p>
           </div>
         </Col>
-
       </Row>
     </Container>
   );

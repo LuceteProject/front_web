@@ -19,11 +19,13 @@ import Drive from "./pages/Drive";
 import Profile from "./pages/Profile";
 import Todolist from "./pages/Todolist";
 import BoardPost from "./pages/BoardPost";
+import MemberListPage from "./pages/settings//MemberList"; 
+
 import { Button } from "react-bootstrap";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  //const [isLoggedIn, setIsLoggedIn] = useState(true);
+  //const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   // 로그인 후 페이지 보고 싶으면 isLoggedIn 변수 true로 변경
   const handleNaverLogin = (response: any) => {
     if (response) {
@@ -55,7 +57,8 @@ function App() {
               <Route path="/calendar" Component={Calendar} />
               <Route path="/drive" Component={Drive} />
               <Route path="/profile" Component={Profile} />
-
+              <Route path="/profile/memberlist" Component={MemberListPage} />
+              <Route path="/profile/attendance" Component={MemberListPage} />
               <Route path="/board/:postId" Component={BoardPost} />
 
               <Route path="*" element={<Navigate to="/" replace />} />
