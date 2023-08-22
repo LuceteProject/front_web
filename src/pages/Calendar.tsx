@@ -5,7 +5,7 @@ import { useMediaQuery } from "react-responsive";
 import Calendar from "react-calendar";
 import moment from "moment";
 
-import { EventListItem } from "../components/Events";
+import { EventListItem } from "../components/EventItem";
 import { AddEvent } from "../components/Modal";
 import { Event } from "../types";
 
@@ -14,18 +14,19 @@ import "../styles/Calendar.css";
 
 function Page() {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  /* dates : 달력에 표시할 일정들 저장 */
   const [dates, setDates] = useState([
     "2023-07-22",
     "2023-07-30",
     "2023-07-31", //dummy
   ]);
-
+  /* 일정목록 */
   const [items, setItems] = useState<Event[]>([]);
   useEffect(() => {
     const fetchItemData = async () => {
       const userId = 1;
-      const postData = await fetchData(`api/v1/schedules/userID/${userId}`); //확인 필요
-      setItems(postData);
+      const response = await fetchData(`api/v1/schedules/userID/${userId}`); //확인 필요
+      setItems(response);
       //console.log(postData);
     };
     fetchItemData();

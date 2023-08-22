@@ -47,8 +47,10 @@ function Page(): JSX.Element {
 
   useEffect(() => {
     const fetchPostsData = async () => {
-      const postData = await fetchData('api/v1/posts'); //확인 필요
-      setPosts(postData.content);
+      const response = await fetchData('api/v1/posts'); //확인 필요
+      setPosts(response.content);
+      console.log(response.content);
+
     };
     fetchPostsData();
   }, []);
@@ -110,8 +112,10 @@ function Page(): JSX.Element {
                 </Nav>
               </Col>
             </Row>
+
             <div style={{ height: 10 }} />
-            <Row>
+            
+              <Row>
               <Col>
                 {/* 게시글 목록 */}
                 <Tab.Content>
@@ -126,7 +130,7 @@ function Page(): JSX.Element {
                   </Tab.Pane>
                 </Tab.Content>
               </Col>
-            </Row>
+            </Row>  
             <Row>
               <Col>
                 <Button
