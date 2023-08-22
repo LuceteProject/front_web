@@ -60,13 +60,21 @@ export type Event = {
   alarm?: string;
 };
 
-export interface Member {
+export type Member = {
   id: number;
   profileImage?: string;
   name: string;
   semester: number;
-  team: string;
+  team_code: string;
   phone: string;
   email_address? : string;
   profile_message: string;
+  image?: string;
 };
+
+export type Attendance = {
+  id: number;
+  user_id: number;
+  point : number;
+  date : string;
+}

@@ -20,6 +20,7 @@ import Profile from "./pages/Profile";
 import Todolist from "./pages/Todolist";
 import BoardPost from "./pages/BoardPost";
 import MemberListPage from "./pages/settings/MemberList";
+import AttendanceListPage from "./pages/settings/AttendanceList";
 
 import { Button } from "react-bootstrap";
 
@@ -86,7 +87,7 @@ function App() {
               <Route path="/drive" Component={Drive} />
               <Route path="/profile" Component={Profile} />
               <Route path="/profile/memberlist" Component={MemberListPage} />
-              <Route path="/profile/attendance" Component={MemberListPage} />
+              <Route path="/profile/attendance" Component={AttendanceListPage} />
               <Route path="/board/:postId" Component={BoardPost} />
 
               <Route path="*" element={<Navigate to="/" replace />} />
