@@ -1,62 +1,83 @@
+/* styles/Member.css */
 .member-list {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 10px;
+  margin: 20px;
+}
+
+.member-container {
+  width: 100%;
+  max-width: 800px;
+  margin-top: 20px;
 }
 
 .member-item {
   display: flex;
   align-items: center;
   border: 1px solid #ccc;
-  min-width: 500px;
-  margin: 10px;
-}
-
-.member-details {
-  margin-left: 20px;
-}
-
-.member-details h3 {
-  margin: 0;
-}
-
-.member-details p {
-  margin: 5px 0;
-}
-.profile-view {
-  display: flex;
-  flex-direction: row;
-
-  background-color: white;
-  align-items: center;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .profile-image {
-  width: 30px;
-  height: 30px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  margin-right: 30px;
+  margin-right: 20px;
 }
-.profile-details {
+
+.member-details {
+  flex-grow: 1;
+}
+
+.profile-header {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
 }
-.profile-text {
-  font-size: 18px;
-  color: #000;
-}
+
 .profile-name {
   font-size: 1.2rem;
   font-weight: bold;
   color: #000;
+  margin: 0;
 }
-.profile-info {
+
+.profile-team {
   font-size: 1rem;
-  margin: 5px 0;
+  font-weight: bold;
+  color: #555;
+  margin: 0;
 }
-.message-text {
-  font-size: 18px;
+
+.profile-info {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 2px 0;
+}
+
+.profile-message {
+  font-size: 1.2rem;
   color: #6554a2;
   font-family: "Dongle";
+}
+
+/* Responsive layout */
+@media (max-width: 768px) {
+  .member-list {
+    align-items: stretch;
+  }
+  
+  .member-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .profile-image {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
 }

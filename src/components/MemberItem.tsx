@@ -10,16 +10,15 @@ interface MemberItemProps {
 const MemberItem = ({ member }: MemberItemProps) => {
   return (
     <div className="member-item">
-      <div className="profile-view">
-        <img className="profile-image" src={member.profileImage} alt="profile-image" />
-        <div className="profile-details">
-          <p className="profile-name">{member.name} : {member.semester} 기 {member.team} 팀</p>
-
-          <p className="profile-info">
-            {member.phone} / 이메일
-          </p>
-          <p className="message-text">" {member.profile_message} "</p>
+      <img className="profile-image" src={member.profileImage} alt="profile-image" />
+      <div className="member-details">
+        <div className="profile-header">
+          <h3 className="profile-name">{member.name}</h3>
+          <p className="profile-team">{member.team}</p>
         </div>
+        <p className="profile-info">번호: {member.phone}</p>
+        <p className="profile-info">이메일: {member.email_address}</p>
+        <p className="profile-message">"{member.profile_message}"</p>
       </div>
     </div>
   );

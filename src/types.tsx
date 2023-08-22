@@ -67,5 +67,6 @@ export interface Member {
   semester: number;
   team: string;
   phone: string;
+  email_address? : string;
   profile_message: string;
 };
