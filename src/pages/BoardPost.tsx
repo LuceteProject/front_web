@@ -3,7 +3,7 @@ import { useLocation, useParams } from "react-router-dom";
 import "../styles/Board.css";
 import { Post, Reply } from "../types";
 import { ReplyItem, ReplyInput } from "../components/Posts";
-import { fetchData } from '../utils/api';
+import { fetchData } from '../utils/API';
 
 const dummyData: Post = {
   id: 1,

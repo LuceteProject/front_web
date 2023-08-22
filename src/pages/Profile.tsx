@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import { fetchData } from "../utils/api";
+import { fetchData } from "../utils/API";
 import { User } from "../types";
 
 import MemberListPage from "./settings/MemberList";

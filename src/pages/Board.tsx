@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Container, Row, Col, Button, Nav, Tab } from "react-bootstrap";
 import { useMediaQuery } from 'react-responsive';
-import { fetchData } from '../utils/api';
+import { fetchData } from '../utils/API';
 import { PostListItem } from "../components/Posts";
 import { Post } from "../types";
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
-import { fetchData } from "../utils/api";
+import { fetchData } from "../utils/API";
 import { useMediaQuery } from "react-responsive";
 import Calendar from "react-calendar";
 import moment from "moment";
