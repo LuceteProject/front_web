@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import { Col, Container, Form, Row } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
-import { fetchData } from "../utils/API";
+import { fetchData } from "../utils/APIs";
 
 import { Todo } from "../types";
 import { TodoItem, InputTodoItem } from "../components/TodoItem";

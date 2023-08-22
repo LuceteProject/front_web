@@ -1,6 +1,6 @@
 // pages/MemberListPage.tsx
 import React, { useEffect, useState } from "react";
-import { fetchData } from "../../utils/API"; // fetchData 함수 정의 필요
+import { fetchData } from "../../utils/APIs"; // fetchData 함수 정의 필요
 import MemberItem from "../../components/MemberItem";
 import { Member } from "../../types";
 import "../../styles/Member.css";
