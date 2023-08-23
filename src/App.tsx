@@ -12,7 +12,6 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./index.css";
 import { Header, Footer } from "./components/Navigation";
-
 import Board from "./pages/Board";
 import Calendar from "./pages/Calendar";
 import Drive from "./pages/Drive";
@@ -26,11 +25,10 @@ import { Button } from "react-bootstrap";
 
 type validateUser = {
   success: boolean;
-  token : string;
-  email : string;
-  name : string;
-
-}
+  token: string;
+  email: string;
+  name: string;
+};
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -47,8 +45,11 @@ function App() {
   // 컴포넌트가 마운트될 때 토큰 확인하여 isLoggedIn 상태 변경
   useEffect(() => {
     const token = new URLSearchParams(window.location.search).get("code");
-    if (token) {setIsLoggedIn(true);}
-/*       if (token) {
+    if (token) {
+      localStorage.setItem("URLtoken", token);
+      setIsLoggedIn(true);
+    }
+    /*       if (token) {
         console.log(token);
         //server에 검증하는 과정
         fetch("api/get-user-info", {
@@ -64,6 +65,7 @@ function App() {
               email: data.email,
               name: data.name,
             });
+            localStorage.setItem("userInfo", user);
             setIsLoggedIn(true);
           });
 
@@ -87,8 +89,11 @@ function App() {
               <Route path="/drive" Component={Drive} />
               <Route path="/profile" Component={Profile} />
               <Route path="/profile/memberlist" Component={MemberListPage} />
-              <Route path="/profile/attendance" Component={AttendanceListPage} />
-              <Route path="/board/:postId" Component={BoardPost} />
+              <Route
+                path="/profile/attendance"
+                Component={AttendanceListPage}
+              />
+              <Route path="/board/postId?:postId" Component={BoardPost} />
 
               <Route path="*" element={<Navigate to="/" replace />} />
             </Routes>
@@ -116,6 +121,7 @@ function App() {
               <Button
                 className="custom-button"
                 onClick={() => {
+                  localStorage.removeItem("URLtoken");
                   console.log("로그아웃");
                 }}
               >
@@ -154,4 +160,3 @@ const redirectToExternalURL = () => {
   return null;
 };
 export default App;
-
