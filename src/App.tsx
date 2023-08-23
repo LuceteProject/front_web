@@ -7,7 +7,8 @@ import {
   Navigate,
   useLocation,
 } from "react-router-dom";
-//import { useLocation } from "react-router-dom";
+import { isTokenValid } from "./utils/APIs";
+import { User } from "./types";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import "./index.css";
@@ -23,54 +24,50 @@ import AttendanceListPage from "./pages/settings/AttendanceList";
 
 import { Button } from "react-bootstrap";
 
-type validateUser = {
-  success: boolean;
-  token: string;
-  email: string;
-  name: string;
-};
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   //const [isLoggedIn, setIsLoggedIn] = useState(true);
   // 로그인 후 페이지 보고 싶으면 isLoggedIn 변수 true로 변경
-  const handleNaverLogin = (response: any) => {
-    if (response) {
-      // 로그인 성공한 경우
-      setIsLoggedIn(true);
-    }
-  };
-  const [user, setUser] = useState<validateUser>();
+  const [user, setUser] = useState<User | null>(null);
 
   // 컴포넌트가 마운트될 때 토큰 확인하여 isLoggedIn 상태 변경
   useEffect(() => {
-    const token = new URLSearchParams(window.location.search).get("code");
-    if (token) {
-      localStorage.setItem("URLtoken", token);
-      setIsLoggedIn(true);
+    const savedToken = localStorage.getItem("URLtoken"); //localStorage에 저장되어 있던 토큰
+    const token = new URLSearchParams(window.location.search).get("code"); //URL에서 code로 받아온 토큰
+    if (savedToken) localStorage.removeItem("URLtoken");
+    if (savedToken) {
+      isTokenValid(savedToken).then((valid) => {
+        if (valid) {
+          //token이 유효할 경우 로그인 유효
+          //user정보 가져오기 -> setUser
+          setIsLoggedIn(true);
+        }
+        else {
+          setIsLoggedIn(false);
+          window.alert("로그인이 만료되었습니다. 다시 로그인해주세요.");
+        }
+      })
     }
-    /*       if (token) {
-        console.log(token);
-        //server에 검증하는 과정
-        fetch("api/get-user-info", {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            setUser({
-              success: data.success,
-              token: data.token,
-              email: data.email,
-              name: data.name,
-            });
-            localStorage.setItem("userInfo", user);
-            setIsLoggedIn(true);
-          });
-
-        setIsLoggedIn(true);
-      } */
+    else if (token) {
+      isTokenValid(token).then((valid) => {
+        if (valid) {
+          //token이 유효할 경우 로그인 유효
+          //user정보 가져오기 -> setUser
+          setIsLoggedIn(true);
+        }
+        else {
+          //localStorage.removeItem("URLtoken");
+          //setIsLoggedIn(false);
+          //window.alert("로그인이 만료되었습니다. 다시 로그인해주세요.");
+          localStorage.setItem("URLtoken", token); //need to delete
+          setIsLoggedIn(true); //need to delete
+          
+        }
+      })
+    }
+    else {
+      setIsLoggedIn(false);
+    }
   }, []);
 
   return (

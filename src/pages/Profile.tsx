@@ -15,6 +15,7 @@ function Page() {
     const userId = 1;
     const fetchUserData = async () => {
       const response = await fetchData(`api/v1/users/${userId}`); //확인 필요
+      //console.log(response); //API 변수 달라져서 프로필 못 불러옴 키 수정 필요
       setUser(response);
     };
     fetchUserData();
