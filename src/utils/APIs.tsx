@@ -2,50 +2,6 @@ import axios from "axios";
 //axios.defaults.withCredentials = true;
 
 const apiUrl = process.env.REACT_APP_API_IP;
-/** function : 서버로부터 데이터 get
- * @params {string} endpoint - API 경로
- * @return {any} response.data 결과 응답값 타입에 맞게 매핑 필요
-*/
-export const fetchData = async (endpoint: string) => {
-  try {
-    const response = await axios.get(`${apiUrl}${endpoint}`);
-    return response.data;
-  } catch (error) {
-    console.error("Error fetching data:", error);
-    throw error;
-  }
-};
-
-/** function : postData 서버에 데이터 전송
- * API 양식에 맞춰서 필요한 데이터 다 넣었는지 확인 필요
- * @params {string} endpoint - API 경로
- * @params {any} data - 전송할 데이터 (json)
- * @return {any} response.data 결과 응답값
-
-*/
-export const postData = async (endpoint: string, data: any) => {
-  try {
-    //user_id 저장소에서 가져오기
-    const userInfo = localStorage.getItem('user-info');
-    const userInfoJson = userInfo ? JSON.parse(userInfo) : null;
-    if (userInfoJson) {
-      const user_id = userInfoJson.user_id;
-      const postData = {
-        ...data,
-        user_id, //userId;
-      }
-      const response = await axios.post(`${apiUrl}${endpoint}`, postData);
-      return response.data;
-    }
-    else {
-      window.alert('올바르지 않은 접근입니다.'); //userId가 없다는 뜻
-      return;
-    }
-  } catch (error) {
-    console.error("Error posting data:", error);
-    throw error;
-  }
-};
 
 /** function : isTokenValid localStorage에 저장된 토큰이 유효한지 검증
  * endpoint는 API 양식에 맞춰서 변경 필요
@@ -79,3 +35,109 @@ export const isTokenValid = async (token: string) => {
     return false;
   }
 }
+
+/** function : 서버로부터 데이터 get
+ * @params {string} endpoint - API 경로
+ * @return {any} response.data 결과 응답값 타입에 맞게 매핑 필요
+*/
+export const fetchData = async (endpoint: string) => {
+  try {
+    const response = await axios.get(`${apiUrl}${endpoint}`);
+    return response.data;
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    throw error;
+  }
+};
+
+/** function : postData 서버에 데이터 전송
+ * API 양식에 맞춰서 필요한 데이터 다 넣었는지 확인 필요
+ * @params {string} endpoint - API 경로
+ * @params {any} data - 전송할 데이터 (json)
+ * @return {any} response.data 결과 응답값
+*/
+export const postData = async (endpoint: string, data: any) => {
+  try {
+    //user_id 저장소에서 가져오기
+    const userInfo = localStorage.getItem('user-info');
+    const userInfoJson = userInfo ? JSON.parse(userInfo) : null;
+    if (userInfoJson) {
+      const user_id = userInfoJson.user_id;
+      const postData = {
+        ...data,
+        user_id, //userId;
+      }
+      const response = await axios.post(`${apiUrl}${endpoint}`, postData);
+      return response.data;
+    }
+    else {
+      window.alert('올바르지 않은 접근입니다.'); //userId가 없다는 뜻
+      return;
+    }
+  } catch (error) {
+    console.error("Error posting data:", error);
+    throw error;
+  }
+};
+
+/** function : putData 서버에 데이터 수정 요청
+ * API 양식에 맞춰서 필요한 데이터 다 넣었는지 확인 필요
+ * @params {string} endpoint - API 경로
+ * @params {any} data - 수정할 데이터 (json)
+ * @return {any} response.data 결과 응답값
+*/
+export const putData = async (endpoint: string, data: any) => {
+  try {
+    // user 정보 가져오기
+    const userInfo = localStorage.getItem('user-info');
+    const userInfoJson = userInfo ? JSON.parse(userInfo) : null;
+    if (userInfoJson) {
+      const user_id = userInfoJson.user_id;
+      const putData = {
+        ...data, // 수정할 항목의 id는 data에 들어있어야 함
+        user_id,
+      }
+      const response = await axios.put(`${apiUrl}${endpoint}`, putData);
+      return response.data;
+    } else {
+      window.alert('올바르지 않은 접근입니다.');
+      return;
+    }
+  } catch (error) {
+    console.error("Error updating data:", error);
+    throw error;
+  }
+};
+
+/** function : deleteData 서버에 데이터 삭제 요청
+ * @params {string} endpoint - API 경로
+ * @return {any} response.data 결과 응답값
+*/
+export const deleteData = async (endpoint: string) => {
+  try {
+    // user 정보 가져오기 필요?
+    /*     const userInfo = localStorage.getItem('user-info');
+        const userInfoJson = userInfo ? JSON.parse(userInfo) : null;
+        if (userInfoJson) {
+          const user_id = userInfoJson.user_id;
+          const response = await axios.delete(`${apiUrl}${endpoint}`, {
+            data: {
+              user_id,
+            },
+          });
+          return response.data;
+        } else {
+          window.alert('올바르지 않은 접근입니다.');
+          return;
+        } */
+    const response = await axios.delete(`${apiUrl}${endpoint}`, {
+      /* data: {
+        // 삭제할 아이템 id만 endpoint에 넣으면 되나?
+      }, */
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error deleting data:", error);
+    throw error;
+  }
+};
