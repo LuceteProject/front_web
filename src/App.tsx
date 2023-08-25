@@ -29,12 +29,21 @@ function App() {
   //const [isLoggedIn, setIsLoggedIn] = useState(true);
   // 로그인 후 페이지 보고 싶으면 isLoggedIn 변수 true로 변경
   const [user, setUser] = useState<User | null>(null);
+  useEffect(() => {
+    const token = new URLSearchParams(window.location.search).get("code"); //URL에서 code로 받아온 토큰
+    if (token) {
+      sessionStorage.setItem("URLtoken", token); //need to delete
+      setIsLoggedIn(true);
+    }
+  }, [])
 
   // 컴포넌트가 마운트될 때 토큰 확인하여 isLoggedIn 상태 변경
-  useEffect(() => {
-    const savedToken = localStorage.getItem("URLtoken"); //localStorage에 저장되어 있던 토큰
+  /* useEffect(() => {
+    //const savedToken = localStorage.getItem("URLtoken"); //localStorage에 저장되어 있던 토큰
+    const savedToken = sessionStorage.getItem("URLtoken"); //localStorage에 저장되어 있던 토큰
     const token = new URLSearchParams(window.location.search).get("code"); //URL에서 code로 받아온 토큰
-    if (savedToken) localStorage.removeItem("URLtoken");
+    //if (savedToken) localStorage.removeItem("URLtoken"); //need to delete
+    //if (savedToken) sessionStorage.removeItem("URLtoken"); //need to delete
     if (savedToken) {
       isTokenValid(savedToken).then((valid) => {
         if (valid) {
@@ -59,7 +68,8 @@ function App() {
           //localStorage.removeItem("URLtoken");
           //setIsLoggedIn(false);
           //window.alert("로그인이 만료되었습니다. 다시 로그인해주세요.");
-          localStorage.setItem("URLtoken", token); //need to delete
+          //localStorage.setItem("URLtoken", token); //need to delete
+          sessionStorage.setItem("URLtoken", token); //need to delete
           setIsLoggedIn(true); //need to delete
           
         }
@@ -68,7 +78,7 @@ function App() {
     else {
       setIsLoggedIn(false);
     }
-  }, []);
+  }, []); */
 
   return (
     <Router>
@@ -118,7 +128,8 @@ function App() {
               <Button
                 className="custom-button"
                 onClick={() => {
-                  localStorage.removeItem("URLtoken");
+                  //localStorage.removeItem("URLtoken");
+                  sessionStorage.removeItem("URLtoken");
                   console.log("로그아웃");
                 }}
               >

@@ -21,8 +21,9 @@ export const isTokenValid = async (token: string) => {
     // valid하다면 true 반환, 아닌 경우 false 반환
     // valid하면 -> 유저정보를 토큰에 저장(data.user 확인 필요)
     if (data.valid) {
-      localStorage.setItem("URLtoken", token);
-      localStorage.setItem("user-info", data.user);
+      sessionStorage.setItem("URLtoken", token);
+      console.log(sessionStorage.getItem("URLtoken"));
+      sessionStorage.setItem("user-info", data.user);
     }
     else {
       //token이 유효하지 않다면 모든 정보 삭제

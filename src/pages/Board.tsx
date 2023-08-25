@@ -44,7 +44,7 @@ function Page(): JSX.Element {
   // 게시판 목록 상태
   const [posts, setPosts] = useState<Post[]>([]);
   const [selectedPost, setSelectedPost] = useState<Post | null>(); // 클릭한 게시물 정보를 상태로 관리
-  const savedToken = localStorage.getItem("URLtoken");
+  const savedToken = sessionStorage.getItem("URLtoken");
 
   useEffect(() => {
     const fetchPostsData = async () => {
