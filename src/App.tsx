@@ -5,9 +5,8 @@ import {
   Route,
   Link,
   Navigate,
-  useLocation,
 } from "react-router-dom";
-import { isTokenValid } from "./utils/APIs";
+import { isTokenValid, isCodeValid } from "./utils/APIs";
 import { User } from "./types";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -28,23 +27,21 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   //const [isLoggedIn, setIsLoggedIn] = useState(true);
   // 로그인 후 페이지 보고 싶으면 isLoggedIn 변수 true로 변경
-  const [user, setUser] = useState<User | null>(null);
   useEffect(() => {
-    const token = new URLSearchParams(window.location.search).get("code"); //URL에서 code로 받아온 토큰
-    if (token) {
-      sessionStorage.setItem("URLtoken", token); //need to delete
+    const code = new URLSearchParams(window.location.search).get("code"); //URL에서 code로 받아온 토큰
+    if (code) {
+      sessionStorage.setItem("code", code); //need to delete
       setIsLoggedIn(true);
     }
   }, [])
 
   // 컴포넌트가 마운트될 때 토큰 확인하여 isLoggedIn 상태 변경
   /* useEffect(() => {
-    //const savedToken = localStorage.getItem("URLtoken"); //localStorage에 저장되어 있던 토큰
-    const savedToken = sessionStorage.getItem("URLtoken"); //localStorage에 저장되어 있던 토큰
-    const token = new URLSearchParams(window.location.search).get("code"); //URL에서 code로 받아온 토큰
-    //if (savedToken) localStorage.removeItem("URLtoken"); //need to delete
+    const savedToken = sessionStorage.getItem("access-token"); //sessionStorage 저장되어 있던 토큰
+    const code = new URLSearchParams(window.location.search).get("code"); //URL에서 가져온 코드
     //if (savedToken) sessionStorage.removeItem("URLtoken"); //need to delete
     if (savedToken) {
+      // 저장되어 있는 토큰이 유효한지 확인
       isTokenValid(savedToken).then((valid) => {
         if (valid) {
           //token이 유효할 경우 로그인 유효
@@ -57,21 +54,17 @@ function App() {
         }
       })
     }
-    else if (token) {
-      isTokenValid(token).then((valid) => {
+    else if (code) {
+      //서버로부터 토큰 받아오기
+      isCodeValid(code).then((valid) => {
         if (valid) {
           //token이 유효할 경우 로그인 유효
           //user정보 가져오기 -> setUser
           setIsLoggedIn(true);
         }
         else {
-          //localStorage.removeItem("URLtoken");
-          //setIsLoggedIn(false);
-          //window.alert("로그인이 만료되었습니다. 다시 로그인해주세요.");
-          //localStorage.setItem("URLtoken", token); //need to delete
-          sessionStorage.setItem("URLtoken", token); //need to delete
-          setIsLoggedIn(true); //need to delete
-          
+          setIsLoggedIn(false);
+          window.alert("로그인이 만료되었습니다. 다시 로그인해주세요."); 
         }
       })
     }
@@ -149,7 +142,7 @@ function App() {
               <h1 style={{ marginBottom: 50 }}>Welcome to Lucete!</h1>
               <p>로그인하려면 아래 버튼을 누르세요.</p>
               <p>네이버 아이디가 필요합니다.</p>
-              <Button className="custom-button" onClick={redirectToExternalURL}>
+              <Button className="custom-button" onClick={redirectToNaverLogin}>
                 로그인
               </Button>
               <div />
@@ -167,4 +160,15 @@ const redirectToExternalURL = () => {
     process.env.REACT_APP_API_IP + "oauth2/authorization/naver";
   return null;
 };
+const redirectToNaverLogin = () => {
+  const naverLoginUrl = "https://nid.naver.com/oauth2.0/authorize";
+  const clientId = "KgbpyZjpXXLi7s7sHfDP";
+  const redirectUri = encodeURIComponent("http://localhost:3000/");
+  const responseType = "code";
+  const state = "test"; // CSRF 방지를 위한 상태 토큰
+
+  const authUrl = `${naverLoginUrl}?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=${responseType}&state=${state}`;
+  window.location.href = authUrl;
+};
+
 export default App;

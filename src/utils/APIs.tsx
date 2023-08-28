@@ -3,13 +3,13 @@ import axios from "axios";
 
 const apiUrl = process.env.REACT_APP_API_IP;
 
-/** function : isTokenValid localStorage에 저장된 토큰이 유효한지 검증
+/** function : isTokenValid sessionStorage 저장된 토큰이 유효한지 검증
  * endpoint는 API 양식에 맞춰서 변경 필요
- * @params {string} token localStorage에 저장되어 있는 토큰
+ * @params {string} token sessionStorage 저장되어 있는 토큰
  * @return {boolean} data.valid 토큰이 유효한지 검증(t/f)
 */
 export const isTokenValid = async (token: string) => {
-  const endpoint = `api/check-token`;
+  const endpoint = `api/check-token`; //endpoint 확인
   try {
     const response = await fetch(`${apiUrl}${endpoint}`, {
       method: "POST",
@@ -19,16 +19,15 @@ export const isTokenValid = async (token: string) => {
     });
     const data = await response.json();
     // valid하다면 true 반환, 아닌 경우 false 반환
-    // valid하면 -> 유저정보를 토큰에 저장(data.user 확인 필요)
+    // valid하지 않다면 정보 초기화
     if (data.valid) {
-      sessionStorage.setItem("URLtoken", token);
-      console.log(sessionStorage.getItem("URLtoken"));
-      sessionStorage.setItem("user-info", data.user);
+      //sessionStorage.setItem("access-token", token);
+      console.log(sessionStorage.getItem("access-token"));
+      //sessionStorage.setItem("user-info", data.user);
     }
     else {
       //token이 유효하지 않다면 모든 정보 삭제
-      //localStorage.removeItem("URLtoken");
-      //localStorage.removeItem("user-info");
+      sessionStorage.clear();
     }
     return data.valid;
   } catch (error) {
@@ -36,6 +35,41 @@ export const isTokenValid = async (token: string) => {
     return false;
   }
 }
+
+
+/** function : isCodeValid 네이버로부터 받아온 코드로부터 서버에 토큰과 유저정보 요청
+ * endpoint는 API 양식에 맞춰서 변경 필요
+ * @params {string} url에서 찾은 code값
+ * @return {boolean} data.valid 토큰이 유효한지 검증(t/f)
+*/
+export const isCodeValid = async (code: string) => {
+  const endpoint = `api/check-code`; //endpoint 확인
+  try {
+    const response = await fetch(`${apiUrl}${endpoint}`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${code}`,
+      },
+    });
+    const data = await response.json();
+    // valid하다면 true 반환, 아닌 경우 false 반환
+    // valid하면 -> 유저정보를 토큰에 저장(data.user 확인 필요)
+    if (data.valid) {
+      sessionStorage.setItem("access-token", data.token);
+      console.log(sessionStorage.getItem("URLtoken"));
+      sessionStorage.setItem("user-info", data.user);
+    }
+    else {
+      //token이 유효하지 않다면 모든 정보 삭제
+      sessionStorage.clear();
+    }
+    return data.valid;
+  } catch (error) {
+    console.error("Error checking token validity:", error);
+    return false;
+  }
+}
+
 
 /** function : 서버로부터 데이터 get
  * @params {string} endpoint - API 경로
