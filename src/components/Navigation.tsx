@@ -8,8 +8,6 @@ import {
   Container,
   Row,
   Col,
-  Card,
-  Button,
   Offcanvas,
 } from "react-bootstrap";
 import {
@@ -28,7 +26,12 @@ function Header() {
   const handleShow = () => setShow(true);
   return (
     <div>
-      <Navbar bg="light" expand="lg" className="px-10 header-content" style={{ justifyContent: "space-between" }}>
+      <Navbar
+        bg="light"
+        expand="lg"
+        className="px-10 header-content"
+        style={{ justifyContent: "space-between" }}
+      >
         <Navbar.Brand href="/">루케테 LUCETE</Navbar.Brand>
         <FaBell
           style={{
@@ -41,18 +44,19 @@ function Header() {
       <Offcanvas show={show} onHide={handleClose} placement="end">
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>알림함</Offcanvas.Title>
-          <Offcanvas.Header>클릭 시 해당 일정으로 이동(안)함다.</Offcanvas.Header>
+          <Offcanvas.Header>
+            클릭 시 해당 일정으로 이동(안)함다.
+          </Offcanvas.Header>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <div style={{marginBottom: 50}}>
+          <div style={{ marginBottom: 50 }}>
             <p>[공지] 오늘 날씨 맑음 건에 대하여...</p>
-            <p style={{fontSize:15, float:'right'}}>회장 </p>
+            <p style={{ fontSize: 15, float: "right" }}>회장 </p>
           </div>
-          <div style={{marginBottom: 50}}>
+          <div style={{ marginBottom: 50 }}>
             <p>[일정] 23-10-21 정하생일</p>
-            <p style={{fontSize:15, float:'right'}}>정하 </p>
+            <p style={{ fontSize: 15, float: "right" }}>정하 </p>
           </div>
-
         </Offcanvas.Body>
       </Offcanvas>
     </div>

@@ -8,6 +8,15 @@ interface ModalProps {
   handleCloseModal: () => void;
   onAddEvent: (event: Event) => void;
 }
+
+/**
+ * 
+ * @param {ModalProps} showModal 모달 활성화 여부
+ * @param {ModalProps} handleCloseModal 모달 닫을 때 함수
+ * @param {ModalProps} onAddEvent 일정추가 함수 
+ * 
+ * @todo 전체적인 코드 변경 필요
+ */
 const AddEvent = ({ showModal, handleCloseModal, onAddEvent }: ModalProps) => {
   const [selectedStartDate, setSelectedStartDate] = useState<string>('');
   const [selectedEndDate, setSelectedEndDate] = useState<string>('');
@@ -37,13 +46,14 @@ const AddEvent = ({ showModal, handleCloseModal, onAddEvent }: ModalProps) => {
 
   const handleAddEventClick = () => {
     onAddEvent({
+      /* 타입으로 변경 필요 */
       id: 18,
       title: "이벤트 제목",
       content: "2023-07-28",
       start: "14:00",
       end: "16:00",
-      user_id: 1, //수정 필요
-      team_code: 0 //수정 필요
+      user_id: 1, 
+      team_code: 0 
     });
   };
   return (

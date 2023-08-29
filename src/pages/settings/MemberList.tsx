@@ -1,12 +1,16 @@
 // pages/MemberListPage.tsx
 import React, { useEffect, useState } from "react";
-import { fetchData } from "../../utils/APIs"; // fetchData 함수 정의 필요
+import { fetchData } from "../../utils/APIs";
 import MemberItem from "../../components/MemberItem";
 import { Member } from "../../types";
 import "../../styles/Member.css";
-
+/**
+ * @todo 권한에 따라 유저정보 다르게 불러올거면 API 엔드포인트 수정
+ * 
+ */
 const Page = () => {
   const [members, setMembers] = useState<Member[]>([]);
+  const user_id = JSON.parse(sessionStorage.getItem("user-info") || "{}").id; //사용자 정보 가져올 때 참조
 
   useEffect(() => {
     const fetchMembers = async () => {

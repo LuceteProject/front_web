@@ -12,20 +12,23 @@ import { Event } from "../types";
 import "react-calendar/dist/Calendar.css";
 import "../styles/Calendar.css";
 
-function Page() {
+/**
+ * @todo 일정 CRUD
+ */
+const Page = () => {
+  const user_id = JSON.parse(sessionStorage.getItem("user-info") || "{}").id; //사용자 정보 가져올 때 참조
   const [selectedDate, setSelectedDate] = useState(new Date());
   /* dates : 달력에 표시할 일정들 저장 */
   const [dates, setDates] = useState([
     "2023-07-22",
     "2023-07-30",
-    "2023-07-31", //dummy
+    "2023-07-31", //API에서 가져올 것
   ]);
   /* 일정목록 */
   const [items, setItems] = useState<Event[]>([]);
   useEffect(() => {
     const fetchItemData = async () => {
-      const userId = 1;
-      const response = await fetchData(`api/v1/schedules/userID/${userId}`); //확인 필요
+      const response = await fetchData(`api/v1/schedules/userID/${user_id}`); //확인 필요
       setItems(response);
       //console.log(postData);
     };

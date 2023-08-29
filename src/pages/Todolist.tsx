@@ -7,9 +7,11 @@ import { fetchData, postData } from "../utils/APIs";
 import { Todo } from "../types";
 import { TodoItem, InputTodoItem } from "../components/TodoItem";
 import "../styles/Todo.css"; // Board.css 파일에서 추가적인 스타일을 정의합니다.
-
-function Page() {
-
+/**
+ * @todo 항목 수정 및 삭제 기능
+ */
+const Page = () => {
+  const user_id = JSON.parse(sessionStorage.getItem("user-info") || "{}").id; //사용자 정보 가져올 때 참조
   const [todos, setTodos] = useState<Todo[]>([]);
   const [newTodoAll, setNewTodoAll] = useState("");
   const [newTodoTeam, setNewTodoTeam] = useState("");
@@ -17,9 +19,8 @@ function Page() {
   const [teamCode, setTeamCode] = useState(0);
 
   useEffect(() => {
-    const userId = 3; //현재 유저 아이디 가져와야 함
     const fetchTodoData = async () => {
-      const response = await fetchData(`api/v1/todos/userID/${userId}`); //확인 필요
+      const response = await fetchData(`api/v1/todos/userID/${user_id}`); //확인 필요
       setTodos(response);
     };
     fetchTodoData();
@@ -44,10 +45,9 @@ function Page() {
         content: newTodo,
         completed: false,
         team_code: teamCode,
-        user_id: 0
+        user_id: 0,
       };
       setTodos([...todos, newTodoItem]);
-      
     }
   };
   /* 
@@ -468,5 +468,5 @@ function Page() {
       )}
     </div>
   );
-}
+};
 export default Page;

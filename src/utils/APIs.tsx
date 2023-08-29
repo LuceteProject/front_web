@@ -94,10 +94,11 @@ export const fetchData = async (endpoint: string) => {
 export const postData = async (endpoint: string, data: any) => {
   try {
     //user_id 저장소에서 가져오기
-    const userInfo = localStorage.getItem('user-info');
-    const userInfoJson = userInfo ? JSON.parse(userInfo) : null;
-    if (userInfoJson) {
-      const user_id = userInfoJson.user_id;
+    //const userInfo = localStorage.getItem('user-info');
+    //const userInfoJson = userInfo ? JSON.parse(userInfo) : null;
+    const user_id = JSON.parse(sessionStorage.getItem('user-info') || '{}').id;
+    if (user_id) {
+      //const user_id = userInfoJson.user_id;
       const postData = {
         ...data,
         user_id, //userId;

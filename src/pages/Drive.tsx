@@ -7,7 +7,7 @@ interface FileItem {
   type: string;
 }
 
-function Page() {
+const Page = () => {
   const [files, setFiles] = useState<FileItem[]>([]);
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,6 +48,6 @@ function Page() {
       </div>
     </Container>
   );
-}
+};
 
 export default Page;
