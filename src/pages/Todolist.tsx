@@ -9,6 +9,10 @@ import { TodoItem, InputTodoItem } from "../components/TodoItem";
 import "../styles/Todo.css"; // Board.css 파일에서 추가적인 스타일을 정의합니다.
 /**
  * @todo 항목 수정 및 삭제 기능
+ * @todo handleAddTodo에서 항목 추가 시 API 연결
+ * @todo handleToggleTodo에 항목 상태 업데이트(API 연결)
+ * @todo handleDeleteTodo에 항목 삭제 시 API 연결
+ * @todo todo type 수정(id값 옵션으로)
  */
 const Page = () => {
   const user_id = JSON.parse(sessionStorage.getItem("user-info") || "{}").id; //사용자 정보 가져올 때 참조
@@ -45,9 +49,9 @@ const Page = () => {
         content: newTodo,
         completed: false,
         team_code: teamCode,
-        user_id: 0,
+        user_id: user_id,
       };
-      setTodos([...todos, newTodoItem]);
+      setTodos([...todos, newTodoItem]); //API 호출 후 다시 불러오는 방향으로 수정해야 함
     }
   };
   /* 
