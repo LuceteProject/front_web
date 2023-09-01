@@ -37,7 +37,8 @@ export type Reply = {
 export type User = {
   id: any;
   name: string; // 이름
-  google_id : string;
+  google_id? : string;
+  naver_id? : string;
   email: string;
   phone : string;
   team: string; // 소속

@@ -21,8 +21,9 @@ export const isTokenValid = async (token: string) => {
     // valid하다면 true 반환, 아닌 경우 false 반환
     // valid하지 않다면 정보 초기화
     if (data.valid) {
+      //어떤 정보 저장되어 있는지 확인하고 주석 해제
       //sessionStorage.setItem("access-token", token);
-      console.log(sessionStorage.getItem("access-token"));
+      //console.log(sessionStorage.getItem("access-token"));
       //sessionStorage.setItem("user-info", data.user);
     }
     else {
@@ -94,11 +95,11 @@ export const fetchData = async (endpoint: string) => {
 export const postData = async (endpoint: string, data: any) => {
   try {
     //user_id 저장소에서 가져오기
-    //const userInfo = localStorage.getItem('user-info');
+    //const userInfo = sessionStorage.getItem('user-info');
     //const userInfoJson = userInfo ? JSON.parse(userInfo) : null;
-    const user_id = JSON.parse(sessionStorage.getItem('user-info') || '{}').id;
-    if (user_id) {
-      //const user_id = userInfoJson.user_id;
+    const userInfoJson = JSON.parse(sessionStorage.getItem('user-info') || 'null');
+    if (userInfoJson) {
+      const user_id = userInfoJson.user_id;
       const postData = {
         ...data,
         user_id, //userId;
@@ -125,8 +126,9 @@ export const postData = async (endpoint: string, data: any) => {
 export const putData = async (endpoint: string, data: any) => {
   try {
     // user 정보 가져오기
-    const userInfo = localStorage.getItem('user-info');
-    const userInfoJson = userInfo ? JSON.parse(userInfo) : null;
+    //const userInfo = sessionStorage.getItem('user-info');
+    //const userInfoJson = userInfo ? JSON.parse(userInfo) : null;
+    const userInfoJson = JSON.parse(sessionStorage.getItem('user-info') || 'null');
     if (userInfoJson) {
       const user_id = userInfoJson.user_id;
       const putData = {
@@ -152,7 +154,7 @@ export const putData = async (endpoint: string, data: any) => {
 export const deleteData = async (endpoint: string) => {
   try {
     // user 정보 가져오기 필요?
-    /*     const userInfo = localStorage.getItem('user-info');
+    /*     const userInfo = sessionStorage.getItem('user-info');
         const userInfoJson = userInfo ? JSON.parse(userInfo) : null;
         if (userInfoJson) {
           const user_id = userInfoJson.user_id;
