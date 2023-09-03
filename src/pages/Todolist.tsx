@@ -96,7 +96,7 @@ const Page = () => {
             </Col>
           </Row>
           <Row>
-            <Col xs={6} md={4}>
+            <Col xs={5} md={4}>
               {/* 전체 투두리스트 */}
               <div
                 style={{

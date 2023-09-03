@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/Todo.css"; // Board.css 파일에서 추가적인 스타일을 정의합니다.\
 import { FaRegCircle, FaRegCheckCircle, FaTimes, FaMinus, FaPlusCircle } from "react-icons/fa";
 import { Todo } from "../types";
+import { Ellipsis } from "react-bootstrap/esm/PageItem";
 
 type TodoCategory = "All" | "Team" | "Personal";
 const serverCategoryToClientCategory: { [key: number]: TodoCategory } = {
@@ -35,10 +36,10 @@ const TodoItem = (props: TodoItemProps) => {
   return (
     /* 완료된 항목들 정렬은 서버에서 받아올 때 정렬된 상태로 ? 리렌더링 문제 있긴함*/
     <div style={{ display: "flex", marginTop: 12 }}>
-      <FaRegCircle style={{ display: item.completed ? 'none' : 'block' }} size={20} color={color} onClick={() => onChecked(item.id)} />
-      <FaRegCheckCircle style={{ display: item.completed ? 'block' : 'none' }} size={20} color={color} onClick={() => onChecked(item.id)} />
+      <FaRegCircle style={{ display: item.completed ? 'none' : 'block' }} size={30} color={color} onClick={() => onChecked(item.id)} />
+      <FaRegCheckCircle style={{ display: item.completed ? 'block' : 'none' }} size={30} color={color} onClick={() => onChecked(item.id)} />
       
-      <div style={{ minWidth: 240, marginLeft: 5, marginRight: 5, }}>{item.content}</div>
+      <text style={{maxWidth: 240, wordBreak: 'break-all', minWidth: 240, marginLeft: 5, marginRight: 5, fontSize: 20 }}>{item.content}</text>
       <FaMinus
         className="remove-icon"
         size={20}
