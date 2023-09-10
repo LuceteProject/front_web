@@ -4,7 +4,8 @@ import { Container, Row, Col, Button, Nav, Tab } from "react-bootstrap";
 import { useMediaQuery } from "react-responsive";
 import { fetchData } from "../utils/APIs";
 import { PostListItem } from "../components/PostItem";
-import { Post } from "../types";
+import { Post, Board, Event } from "../types";
+import { AddBoard } from "../components/Modal";
 
 import "../styles/Board.css";
 
@@ -73,6 +74,21 @@ const Page = () => {
       navigate(`/board/${selectedPost.id}`); // 선택한 게시물의 id로 경로 설정
     }
   }, [selectedPost]);
+
+  const [showModal, setShowModal] = useState(false);
+  const handleAddEventClick = () => {
+    console.log("add button pressed");
+    setShowModal(true);
+  };
+
+  const handleAddBoard = (eventData: Board) => {
+    // 여기서 API 호출이나 상태 업데이트 등의 로직을 수행할 수 있습니다.
+    setShowModal(false);
+  };
+  const handleAddEvent = (eventData: Event) => {
+    // 여기서 API 호출이나 상태 업데이트 등의 로직을 수행할 수 있습니다.
+    setShowModal(false);
+  };
 
   //반응형 웹
   const isDesktop: boolean = useMediaQuery({
@@ -157,10 +173,17 @@ const Page = () => {
                     marginTop: "20px",
                     border: 1,
                   }}
+                  onClick={handleAddEventClick}
                 >
                   글쓰기
                 </Button>
               </Col>
+              <AddBoard
+              showModal={showModal}
+              handleCloseModal={() => setShowModal(false)}
+              onAddEvent={handleAddEvent}
+              onAddBoard={handleAddBoard}
+            />
             </Row>
           </Tab.Container>
         </div>

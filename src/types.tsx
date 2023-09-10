@@ -61,6 +61,15 @@ export type Event = {
   alarm?: string;
 };
 
+export type Board = {
+  id: number;
+  user_id : number;
+  title: string;
+  content: string;
+  team_code: number;
+  start: string;
+}
+
 export type Member = {
   id: number;
   profileImage?: string;

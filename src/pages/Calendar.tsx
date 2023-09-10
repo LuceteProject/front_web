@@ -7,7 +7,7 @@ import moment from "moment";
 
 import { EventListItem } from "../components/EventItem";
 import { AddEvent } from "../components/Modal";
-import { Event } from "../types";
+import { Event, Board } from "../types";
 
 import "react-calendar/dist/Calendar.css";
 import "../styles/Calendar.css";
@@ -48,6 +48,9 @@ const Page = () => {
     console.log("새로운 일정 추가:", eventData);
     setShowModal(false);
   };
+  const handleAddBoard = (eventData: Board) =>{
+    setShowModal(false);
+  }
 
   const handleDateChange = (
     date: Date,
@@ -133,6 +136,7 @@ const Page = () => {
               showModal={showModal}
               handleCloseModal={() => setShowModal(false)}
               onAddEvent={handleAddEvent}
+              onAddBoard={handleAddBoard}
             />
           </Row>
         </Container>
@@ -208,6 +212,7 @@ const Page = () => {
               showModal={showModal}
               handleCloseModal={() => setShowModal(false)}
               onAddEvent={handleAddEvent}
+              onAddBoard={handleAddBoard}
             />
           </Row>
         </Container>
