@@ -102,7 +102,7 @@ const AddBoard = ({ showModal, handleCloseModal, onAddBoard }: ModalProps) => {
     onAddBoard({
       id: 18,
       title: "게시판 제목",
-      content: "2023-07-28",
+      content: "본문",
       start: "14:00",
       user_id: 1, //수정 필요
       team_code: 0 //수정 필요

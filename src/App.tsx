@@ -24,7 +24,7 @@ import AttendanceListPage from "./pages/settings/AttendanceList";
 import { Button } from "react-bootstrap";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   //const [isLoggedIn, setIsLoggedIn] = useState(true);
   // 로그인 후 페이지 보고 싶으면 isLoggedIn 변수 true로 변경
   useEffect(() => {
